@@ -51,7 +51,7 @@ sudo apt install -y glusterfs-client
 sudo mkdir -p /mnt/disks/gluster_data
 
 # Deploying a cluster
-cd "pecan-experiments/experiments/autocaching"
+cd "pecan-experiments/experiments/pecan"
 
 # Test that a cluster can be successfully deployed and terminated
 ./manage_cluster.sh start
