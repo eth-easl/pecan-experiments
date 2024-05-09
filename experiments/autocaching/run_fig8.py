@@ -1,5 +1,6 @@
 import os, sys
 import subprocess as sp
+import fileinput
 
 
 '''
@@ -10,30 +11,90 @@ import subprocess as sp
 '''
 
 restart_workers_cmd = '''./manage_cluster restart_service'''
+stop_workers_cmd = '''./manage_cluster stop'''
+service_yaml = '''default_config.yaml'''
+
+pecan_img = '''tf_oto:pecan'''
+cachew_img = '''tf_oto:pecan''' # Same as Pecan, we just don't spawn any local workers
+
+ResNet_cmd = '''
+FIXMEEEEEEE {0} FIXMEEE {1}
+'''
+
+Retina_cmd = '''
+
+'''
 
 
+output_fig = '''fig8_ResNet50_v2-8.pdf'''
 
 ### a) Pecan
 
-# Set correct img
+n_local = 10
+n_steps = 5000
+disp = 'FIXME'
+
+# Set correct service img
+file_lines = []
+with open(service_yaml, 'r') as file:
+    for line in file:
+        if 'image: "' in line:
+            file_lines.append('image: "' + 'tf_oto:pecan')
+        else:
+            file_lines.append(line)
+
 
 
 sp.run(restart_workers_cmd)
 
-
+sp.run(ResNet_cmd.format(n_local, n_steps))
 
 
 
 ### b) Cachew
 
+n_local = 0
+n_steps = 5000
+disp = 'FIXME'
 
+# Set correct service img
+file_lines = []
+with open(service_yaml, 'r') as file:
+    for line in file:
+        if 'image: "' in line:
+            file_lines.append('image: "' + 'tf_oto:pecan')
+        else:
+            file_lines.append(line)
+
+
+
+sp.run(restart_workers_cmd)
+
+sp.run(ResNet_cmd.format(n_local, n_steps))
 
 
 
 
 ### c) No service
 
+n_local = 0
+n_steps = 5000
+disp = 'None'
+
+# Set correct service img
+file_lines = []
+with open(service_yaml, 'r') as file:
+    for line in file:
+        if 'image: "' in line:
+            file_lines.append('image: "' + 'tf_oto:pecan')
+        else:
+            file_lines.append(line)
 
 
 
-### 
+sp.run(restart_workers_cmd)
+
+sp.run(ResNet_cmd.format(n_local, n_steps))
+
+
+### d) Plotting
