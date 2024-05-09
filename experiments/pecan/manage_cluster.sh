@@ -225,12 +225,12 @@ check_kubernetes () {
 
 stop_kubernetes () {
   echo -n "Stopping and deleting the cluster"
-  kops delete cluster --name "$KOPS_CLUSTER_NAME" --yes >> "$logfile" 2>&1;
+  kops delete cluster --name "$KOPS_CLUSTER_NAME" --yes >> "$logfile" 2>&1
   # if  then
   echo_success  
   # else
   #   echo_failure
-  fi
+  # fi
 }
 
 start_kubernetes () {
