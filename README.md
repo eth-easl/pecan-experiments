@@ -16,7 +16,7 @@ __Should we make a separate Pecan repo as well rather than have it as a branch i
 
 Pecan consists of a centralized dispatcher, a dynamic number of remote input data workers, and a disaggregated storage cluster for data caching. For the purpose of the artifact evaluation experiments we keep all components in the `europe-west4-a` zone.
 
-![cachew-system-architecture](Figures/cachew++_system_diagram.drawio.pdf)
+![cachew-system-architecture](Figures/pecan_system_diagram.drawio.png)
 
 Users register training nodes (i.e. clients) with the Pecan dispatcher. To execute an input pipeline with Pecan, clients provide a graph representation of the input pipeline and a path to the input dataset in a cloud storage bucket. Pecan supports and extends the tf.data API for defining input data pipelines from a collection of composable and user-parametrizable operators.
 
@@ -27,8 +27,6 @@ Pecan's input data workers (remote or local) are stateless components responsibl
 Clients fetch data from the workers that are assigned to them by the dispatcher. Clients and workers periodically send heartbeats to the dispatcher to maintain membership in the service and provide metrics used for the autoscaling and autocaching policies.
 
 The raw training datasets for our jobs are 
-
-
 
 
 
@@ -95,7 +93,7 @@ We welcome contributions to Pecan. Please see our [Cachew source code](https://g
 Pecan will appear at USENIX ATC'24. If you decide to use Pecan in your work, please cite our paper: 
 
 ```
-@inproceedings{cachew,
+@inproceedings{pecan,
   author    = {Dan-Ovidiu Graur and
                Oto Mraz and
                Muyu Li and
