@@ -8,22 +8,21 @@ while ! gcloud alpha compute tpus tpu-vm create --zone=europe-west4-a --accelera
 gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a ${VM_NAME}
 
 # Set up the python environment
-alias python=python3 >> .bashrc
+echo "alias python=python3" >> .bashrc
 source .bashrc
 
-apt install python3.8-venv
-python -m venv atc_venv
+sudo apt install python3.8-venv
+python -m venv atc_venv_2
 source atc_venv/bin/activate
 
-# Set up the python environment
+# Set up the python environment and set up Python dependencies
 pip install wheel
-gsutil gs://easl-atc24-ae-files/tensorflow-2.8.0-cp38-cp38-linux_x86_64.whl .
+gsutil cp gs://easl-atc24-ae-files/tensorflow-2.8.0-cp38-cp38-linux_x86_64.whl .
 
 # Clone the relevant repository
 git clone -b main https://github.com/eth-easl/pecan-experiments.git
-
+python -m pip install ./tensorflow-2.8.0-cp38-cp38-linux_x86_64.whl
 python -m pip install -r pecan-experiments/requirements.txt
-python -m pip install --force-reinstall tensorflow-2.8.0-cp38-cp38-linux_x86_64.whl
 
 ## Install other dependencies
 
@@ -46,13 +45,13 @@ sudo mv ./kops /usr/local/bin/
 sudo apt-get install jq
 
 # GlusterFS
-sudo add-apt-repository ppa:gluster/glusterfs-9
+sudo add-apt-repository -y ppa:gluster/glusterfs-9
 sudo apt update
 sudo apt install -y glusterfs-client
 sudo mkdir -p /mnt/disks/gluster_data
 
 # Deploying a cluster
-cd cachew_experiments/experiments/autocaching
+cd "pecan-experiments/experiments/autocaching"
 
 # Test that a cluster can be successfully deployed and terminated
 ./manage_cluster.sh start
