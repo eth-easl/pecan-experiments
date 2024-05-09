@@ -16,18 +16,17 @@ __Should we make a separate Pecan repo as well rather than have it as a branch i
 
 Pecan consists of a centralized dispatcher, a dynamic number of remote input data workers, and a disaggregated storage cluster for data caching. For the purpose of the artifact evaluation experiments we keep all components in the `europe-west4-a` zone.
 
-![cachew-system-architecture](Figures/pecan_system_diagram.drawio.png)
+<p align="center">
+  <img src="Figures/pecan_system_diagram.drawio.png" />
+</p>
 
-Users register training nodes (i.e. clients) with the Pecan dispatcher. To execute an input pipeline with Pecan, clients provide a graph representation of the input pipeline and a path to the input dataset in a cloud storage bucket. Pecan supports and extends the tf.data API for defining input data pipelines from a collection of composable and user-parametrizable operators.
+Users register training nodes (i.e. clients) with the Pecan dispatcher. To execute an input pipeline with Pecan, clients provide a graph representation of the input pipeline and a path to the input dataset (in object storage, NFS, DFS, etc.). Pecan supports and extends the tf.data API for defining input data pipelines from a collection of composable and user-parametrizable operators.
 
-Users may annotate their tf.data input pipeline to mark hits for transformations with strict dependencies using the `keep_posistion=True` flag. Otherwise Pecan can can perform any reordering im compliance with the AutoOrder policy as described in Section 5.2
+To ensure preprocessing semantics are maintained in the context of the AutoOrder policy, users may annotate their tf.data input pipeline to mark transformations with strict dependencies using the `keep_posistion=True` flag. Otherwise Pecan can can perform any reordering in compliance with the AutoOrder policy as described in Section 5.2 of the paper.
 
 Pecan's input data workers (remote or local) are stateless components responsible for producing batches of preprocessed data for clients. The dispatcher dynamically adjusts the number of remote and local input data workers for each job to minimize costs while keeping a minimal epoch time. The dispatcher also profiles and maintains metadata about input pipeline executions across jobs to make data caching decisions. Pecan stores cached datasets in a GlusterFS remote storage cluster. 
 
-Clients fetch data from the workers that are assigned to them by the dispatcher. Clients and workers periodically send heartbeats to the dispatcher to maintain membership in the service and provide metrics used for the autoscaling and autocaching policies.
-
-The raw training datasets for our jobs are 
-
+Clients fetch data from the workers that are assigned to them by the dispatcher. Clients and workers periodically send heartbeats to the dispatcher to maintain membership in the service and provide metrics used for the AutoPlacement (Pecan), AutoScaling and AutoCaching (Cachew) policies.
 
 
 ## <a name="prerequisites"/>Prerequisites
@@ -39,23 +38,48 @@ Our scripts make extensive use of the `gcloud CLI` tool. As a consequence, this 
 
 ### Software Prerequisites for Full Service Deployment
 
+#### Artifact Evaluation Deployment
+
+If you are part of the ATC'24 AE committee, please follow the next instructions:
+
+1. Send us your email via HotCRP so we can add you to our GCP project
+1. Once added, make sure to set the correct project in `gcloud` using `gcloud config set project`
+1. Run the `create_tpu_vm.sh` to create your own TPU VM
+1. Run the `set_up_tpu_vm.sh` to set up the environment on the TPU VM
+1. Test if you are able to successfully deploy a Pecan service: 
+  1. `ssh` into your VM using `gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a atc24-ae-${USER}`
+  1. On the VM run the following commands:
+    ```bash
+    source atc_venv/bin/activate
+    cd "pecan-experiments/experiments/pecan"
+    ./manage_cluster.sh start  # Wait and see if the cluster is successfully deployed
+    ./manage_cluster.sh stop   # Once you are ready, use this command to take down the cluster
+    ```
+1. If you can successfully execute these steps then you are ready to execute experiments. Please go to [experiments/pecan](experiments/pecan) and follow the README there.
+
+Please ignore the *Manual Deployment* steps.
+
+#### Manual Deployment
+
 If you plan to deploy Cachew as a full service, you will need to set up a client VM which meets the following software dependencies:
 
 * Ubuntu 20.04 LTS (GNU/Linux 5.4.0-1072-gcp x86\_64) with root access
 * kubectl v1.21.3
 * kops v.1.20
+* Python 3.8
+* Google Cloud SDK (preferably v466.0.0)
+
+For training models on GPUs, you will also need:
+
 * Nvidia GPU Driver v460.27.04
 * CUDA v11.2
 * cuDNN v8.1
-* Python 3.8
-* Google Cloud SDK (preferably v384.0.0)
-
 
 To deploy the service itself, one requires 
-* A Docker image deploying Cachew builds with CPU-only support. This is used in the Cachew service for the Dispatcher and Workers
+* A Docker image deploying Pecan builds with CPU-only support. This is used in the Pecan service for the Dispatcher and Workers
 * A client-only build of Cachew with GPU/TPU support. 
 
-A safe commit hash at which these can be built is `c7b02e90b4384e721f7c6b13ec55a21cd5295a47`.
+A safe commit hash at which these can be built is `6bffdad771e7acd280b7aeba986d5fed2ff1d5f5`.
 
 ### Hardware Prerequisites for Full Service Deployment
 
@@ -70,13 +94,6 @@ For the Dispatcher as well as the Worker nodes, one requires only VMs with compu
 ### Deployment and Experiment Automation
 
 Since deploying a cluster and running experiments can be complicated, we provide a set of scripts which automate these processes. For deploying a client VM you can use the scripts in the [deploy](deploy). Scripts for running artifact evaluations are found in [experiments](experiments). Further information on how to use this is provided in [this section](#artifact_eval).
-
-
-
-
-
-
-
 
 
 ## Building Pecan
@@ -94,7 +111,7 @@ Pecan will appear at USENIX ATC'24. If you decide to use Pecan in your work, ple
 
 ```
 @inproceedings{pecan,
-  author    = {Dan-Ovidiu Graur and
+  author    = {Dan Graur and
                Oto Mraz and
                Muyu Li and
                Sepehr Pourghannad and
