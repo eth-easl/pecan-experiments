@@ -62,8 +62,8 @@ Please ignore the *Manual Deployment* steps.
 If you plan to deploy Cachew as a full service, you will need to set up a client VM which meets the following software dependencies:
 
 * Ubuntu 20.04 LTS (GNU/Linux 5.4.0-1072-gcp x86\_64) with root access
-* kubectl v1.21.3
-* kops v.1.20
+* kubectl v1.30.0
+* kops v1.19.3
 * Python 3.8
 * Google Cloud SDK (preferably v466.0.0)
 
