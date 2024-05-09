@@ -14,18 +14,22 @@ __Should we make a separate Pecan repo as well rather than have it as a branch i
 
 ## Pecan System Architecture
 
-Pecan consists of a centralized dispatcher, a dynamic number of remote input data workers, and a disaggregated storage cluster for data caching.
+Pecan consists of a centralized dispatcher, a dynamic number of remote input data workers, and a disaggregated storage cluster for data caching. For the purpose of the artifact evaluation experiments we keep all components in the `europe-west4-a` zone.
 
 ![cachew-system-architecture](Figures/cachew++_system_diagram.drawio.pdf)
 
 Users register training nodes (i.e. clients) with the Pecan dispatcher. To execute an input pipeline with Pecan, clients provide a graph representation of the input pipeline and a path to the input dataset in a cloud storage bucket. Pecan supports and extends the tf.data API for defining input data pipelines from a collection of composable and user-parametrizable operators.
 
-TODO:
-Users can annotate their tf.data input pipeline to mark candidate locations for caching/reusing data across executions. Pecan will automatically apply caching at the throughput-optimal location in the input pipeline among the candidate locations. 
+Users may annotate their tf.data input pipeline to mark hits for transformations with strict dependencies using the `keep_posistion=True` flag. Otherwise Pecan can can perform any reordering im compliance with the AutoOrder policy as described in Section 5.2
 
-Cachew's input data workers are stateless components responsible for producing batches of preprocessed data for clients. The dispatcher dynamically adjusts the number of input data workers for each job to minimize epoch time while keeping costs low. The dispatcher also profiles and maintains metadata about input pipeline executions across jobs to make data caching decisions. Cachew stores cached datasets in a GlusterFS remote storage cluster. 
+Pecan's input data workers (remote or local) are stateless components responsible for producing batches of preprocessed data for clients. The dispatcher dynamically adjusts the number of remote and local input data workers for each job to minimize costs while keeping a minimal epoch time. The dispatcher also profiles and maintains metadata about input pipeline executions across jobs to make data caching decisions. Pecan stores cached datasets in a GlusterFS remote storage cluster. 
 
 Clients fetch data from the workers that are assigned to them by the dispatcher. Clients and workers periodically send heartbeats to the dispatcher to maintain membership in the service and provide metrics used for the autoscaling and autocaching policies.
+
+The raw training datasets for our jobs are 
+
+
+
 
 
 ## <a name="prerequisites"/>Prerequisites

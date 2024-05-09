@@ -72,7 +72,7 @@ sp.run(restart_workers_cmd)
 
 sp.run(ResNet_cmd.format(n_local, n_steps))
 
-
+sp.run(stop_workers_cmd)
 
 
 ### c) No service
@@ -98,3 +98,4 @@ sp.run(ResNet_cmd.format(n_local, n_steps))
 
 
 ### d) Plotting
+
