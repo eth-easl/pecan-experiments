@@ -47,14 +47,12 @@ If you are part of the ATC'24 AE committee, please follow the next instructions:
 1. Run the `create_tpu_vm.sh` to create your own TPU VM
 1. Run the `set_up_tpu_vm.sh` to set up the environment on the TPU VM
 1. Test if you are able to successfully deploy a Pecan service: 
-  1. `ssh` into your VM using `gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a atc24-ae-${USER}`
-  1. On the VM run the following commands:
-    ```bash
-    source atc_venv/bin/activate
-    cd "pecan-experiments/experiments/pecan"
-    ./manage_cluster.sh start  # Wait and see if the cluster is successfully deployed
-    ./manage_cluster.sh stop   # Once you are ready, use this command to take down the cluster
-    ```
+    1. `ssh` into your VM using `gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a atc24-ae-${USER}`
+    1. On the VM run the following commands:
+        1. `source atc_venv/bin/activate`
+        1. `cd "pecan-experiments/experiments/pecan"`
+        1. `./manage_cluster.sh start  # Wait and see if the cluster is successfully deployed`
+        1. `./manage_cluster.sh stop   # Once you are ready, use this command to take down the cluster`
 1. If you can successfully execute these steps then you are ready to execute experiments. Please go to [experiments/pecan](experiments/pecan) and follow the README there.
 
 Please ignore the *Manual Deployment* steps.
