@@ -26,6 +26,8 @@ worker_costs = {
 }
 
 flags.DEFINE_string('path', None, 'The path to the log file.')
+flags.DEFINE_string('experiment_type', '', 'An arbitrary string identifying the '
+                    'type of the experiment (e.g. collocated, pecan, cachew).')
 flags.DEFINE_enum('model', 'retinanet', ['retinanet', 'resnet'], 
   'The type of the generated plot.')
 flags.DEFINE_enum('accelerator', 'v2', ['v2', 'v3'], 
@@ -112,9 +114,10 @@ def main(argv):
   actual_tpu_cost = FLAGS.tpu_count * hour_fraction * accelerator_cost
 
   if FLAGS.header:
-    print(f"tpu_cost,worker_cost,remote_workers,local_workers,epoch_time,batches_sec")
-  print(f"{actual_tpu_cost},{actual_worker_cost},{stable_remote_worker_count},"
-        f"{stable_local_worker_count},{epoch_seconds},{batches_per_second}") 
+    print(f"experiment,model,tpu_cost,worker_cost,remote_workers,local_workers,epoch_time,batches_sec")
+  print(f"{FLAGS.experiment_type},{FLAGS.model},{actual_tpu_cost},{actual_worker_cost},"
+        f"{stable_remote_worker_count},{stable_local_worker_count},{epoch_seconds},"
+        f"{batches_per_second}") 
 
 
 if __name__ == '__main__':
