@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-my_user=${1:-${USER}}
-vm_name=${2:-"atc24-ae-${my_user}"}
+# my_user=${1:-${USER}}
+# vm_name=${2:-"atc24-ae-${my_user}"}
+
+my_user="x-non-admin"
+vm_name="atc24-ae-non-admin"
 
 (
   gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a ${my_user}@${vm_name} <<EOF
@@ -26,8 +29,8 @@ vm_name=${2:-"atc24-ae-${my_user}"}
 
     # Fix GCP TPU-VM bugs
     curl -O https://packages.cloud.google.com/apt/doc/apt-key.gpg 
-    sudo apt-key add apt-key.gpg
-    sudo apt update -y && sudo apt-get update
+    sudo apt-key add apt-key.gpg || sudo apt-key add apt-key.gpg
+    (sudo apt update -y && sudo apt-get update) || (sudo apt update -y && sudo apt-get update)
 
     # kubectl
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
