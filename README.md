@@ -42,7 +42,7 @@ Our scripts make extensive use of the `gcloud CLI` tool. As a consequence, this 
 
 If you are part of the ATC'24 AE committee, please follow the next instructions:
 
-1. Send us your email via HotCRP so we can add you to our GCP project
+1. Send us your (anonymous) email via HotCRP so we can add you to our GCP project
 1. Once added, make sure to set the correct project in `gcloud` using `gcloud config set project`
 1. Run the `create_tpu_vm.sh` to create your own TPU VM
 1. Run the `set_up_tpu_vm.sh` to set up the environment on the TPU VM
@@ -51,8 +51,8 @@ If you are part of the ATC'24 AE committee, please follow the next instructions:
     1. On the VM run the following commands:
         1. `source atc_venv/bin/activate`
         1. `cd "pecan-experiments/experiments/pecan"`
-        1. `./manage_cluster.sh start  # Wait and see if the cluster is successfully deployed`
-        1. `./manage_cluster.sh stop   # Once you are ready, use this command to take down the cluster`
+        1. `./manage_cluster.sh start`  # Wait and see if the cluster is successfully deployed
+        1. `./manage_cluster.sh stop`   # Once you are ready, use this command to take down the cluster`
 1. If you can successfully execute these steps then you are ready to execute experiments. Please go to [experiments/pecan](experiments/pecan) and follow the README there.
 
 Please ignore the *Manual Deployment* steps.
@@ -73,18 +73,18 @@ For training models on GPUs, you will also need:
 * CUDA v11.2
 * cuDNN v8.1
 
-To deploy the service itself, one requires 
+To deploy the service itself, one requires:
 * A Docker image deploying Pecan builds with CPU-only support. This is used in the Pecan service for the Dispatcher and Workers
-* A client-only build of Cachew with GPU/TPU support. 
+* A client-only build of Cachew with GPU/TPU support
 
 A safe commit hash at which these can be built is `6bffdad771e7acd280b7aeba986d5fed2ff1d5f5`.
 
 ### Hardware Prerequisites for Full Service Deployment
 
-If you plan to deploy a Full Cachew Service, you will need the following hardware for your Client VM:
+If you plan to deploy a Full Pecan Service, you will need the following hardware for your Client VM:
 
 * Intel or AMD x86 CPU with hardware virtualization support
-* Nvidia V100 GPUs or v3-8 TPUs
+* v2-8 or v3-8 TPUs
 * Around 50 GB of disk space on your root partition
 
 For the Dispatcher as well as the Worker nodes, one requires only VMs with compute power. No accelerators are required. 
@@ -100,7 +100,7 @@ Since deploying a cluster and running experiments can be complicated, we provide
 
 ## Contributing
 
-We welcome contributions to Pecan. Please see our [Cachew source code](https://github.com/eth-easl/cachew/tree/oto-pecan) repository.
+We welcome contributions to Pecan. Please see our [Pecan source code](https://github.com/eth-easl/cachew/tree/oto-pecan) repository.
 
  
 ## Referencing our work

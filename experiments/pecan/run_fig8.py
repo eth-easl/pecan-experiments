@@ -70,9 +70,8 @@ with open(service_yaml, 'r') as file:
 
 
 
-sp.run(restart_workers_cmd)
-
-sp.run(ResNet_cmd.format(n_local, n_steps))
+_, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
+_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd.format(n_local, n_steps))
 
 
 
@@ -92,11 +91,9 @@ with open(service_yaml, 'r') as file:
 
 
 
-sp.run(restart_workers_cmd)
-
-sp.run(ResNet_cmd.format(n_local, n_steps))
-
-sp.run(stop_workers_cmd)
+_, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
+_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd.format(n_local, n_steps))
+_, _, _ = get_exitcode_stdout_stderr(stop_workers_cmd)
 
 
 ### c) No service
@@ -114,11 +111,7 @@ with open(service_yaml, 'r') as file:
         else:
             file_lines.append(line)
 
-
-
-sp.run(restart_workers_cmd)
-
-sp.run(ResNet_cmd.format(n_local, n_steps))
+_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd.format(n_local, n_steps))
 
 
 ### d) Plotting
