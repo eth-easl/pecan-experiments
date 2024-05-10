@@ -28,13 +28,11 @@ Pecan's input data workers (remote or local) are stateless components responsibl
 
 Clients fetch data from the workers that are assigned to them by the dispatcher. Clients and workers periodically send heartbeats to the dispatcher to maintain membership in the service and provide metrics used for the AutoPlacement (Pecan), AutoScaling and AutoCaching (Cachew) policies.
 
-
 ## <a name="prerequisites"/>Prerequisites
 
 ### General Prerequisites
 
 Our scripts make extensive use of the `gcloud CLI` tool. As a consequence, this tool is a prerequisite for setting up VMs and running experiments. Please follow [this tutorial](https://cloud.google.com/sdk/docs/install) to install it. We additionally make use of the `gsutil` tool. To install it, please follow [this tutorial](https://cloud.google.com/storage/docs/gsutil_install). We also suggest that you use Python 3.8 when using Pecan. In this sense we recommend [PyEnv](https://github.com/pyenv/pyenv) as a means to install and manage multiple python versions and virtual environments.
-
 
 ### Software Prerequisites for Full Service Deployment
 
@@ -91,8 +89,7 @@ For the Dispatcher as well as the Worker nodes, one requires only VMs with compu
 
 ### Deployment and Experiment Automation
 
-Since deploying a cluster and running experiments can be complicated, we provide a set of scripts which automate these processes. For deploying a client VM you can use the scripts in the [deploy](deploy). Scripts for running artifact evaluations are found in [experiments](experiments). Further information on how to use this is provided in [this section](#artifact_eval).
-
+Since deploying a cluster and running experiments can be complicated, we provide a scripts which automate these processes. For deploying a client VM you can use the [create_tpu_vm.sh](create_tpu_vm.sh) and [set_up_tpu_vm.sh](set_up_tpu_vm.sh). Scripts for running artifact evaluations are found in [experiments](experiments).
 
 ## Building Pecan
 
@@ -101,7 +98,6 @@ Since deploying a cluster and running experiments can be complicated, we provide
 ## Contributing
 
 We welcome contributions to Pecan. Please see our [Pecan source code](https://github.com/eth-easl/cachew/tree/oto-pecan) repository.
-
  
 ## Referencing our work
 
@@ -121,4 +117,3 @@ Pecan will appear at USENIX ATC'24. If you decide to use Pecan in your work, ple
   year      = {2024},
 }
 ```
-
