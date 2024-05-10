@@ -1,5 +1,7 @@
 import os, sys
 import subprocess as sp
+from subprocess import Popen, PIPE
+import shlex
 import fileinput
 
 
@@ -28,11 +30,34 @@ Retina_cmd = '''
 
 output_fig = '''fig8_ResNet50_v2-8.pdf'''
 
+def get_exitcode_stdout_stderr(cmd):
+    # Execute the external command and get its exitcode, stdout and stderr.
+    args = shlex.split(cmd)
+    proc = Popen(args, stdout=PIPE, stderr=PIPE)
+    out, err = proc.communicate()
+    exitcode = proc.returncode
+    return exitcode, out, err
+
+def get_disp_ip():
+
+    # Getting the dispatcher ip
+    disp_ip_cmd='kubectl get node'
+    disp_ip=None
+    _, disp_ip_lines, _ = get_exitcode_stdout_stderr(disp_ip_cmd)
+    disp_ip_lines = disp_ip_lines.decode('utf-8')
+    disp_ip_lines = disp_ip_lines.split('\n')
+    for i in disp_ip_lines:
+        if 'cachew-dispatcher' in i:
+            disp_ip = i.split(' ')[0]
+
+    return disp_ip
+
+disp_ip = get_disp_ip()
+
 ### a) Pecan
 
 n_local = 10
 n_steps = 5000
-disp = 'FIXME'
 
 # Set correct service img
 file_lines = []
@@ -55,7 +80,6 @@ sp.run(ResNet_cmd.format(n_local, n_steps))
 
 n_local = 0
 n_steps = 5000
-disp = 'FIXME'
 
 # Set correct service img
 file_lines = []
@@ -79,7 +103,7 @@ sp.run(stop_workers_cmd)
 
 n_local = 0
 n_steps = 5000
-disp = 'None'
+disp_ip = 'None'
 
 # Set correct service img
 file_lines = []
