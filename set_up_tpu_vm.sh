@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-# my_user=${1:-${USER}}
-# vm_name=${2:-"atc24-ae-${my_user}"}
-
-my_user="x-non-admin"
-vm_name="atc24-ae-non-admin"
+my_user=${1:-${USER}}
+vm_name=${2:-"atc24-ae-${my_user}"}
 
 (
   gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a ${my_user}@${vm_name} <<EOF
@@ -48,7 +45,7 @@ vm_name="atc24-ae-non-admin"
     # GlusterFS
     sudo add-apt-repository -y ppa:gluster/glusterfs-9
     sudo apt update
-    sudo apt install -y glusterfs-client
+    sudo apt -y install glusterfs-client
     sudo mkdir -p /mnt/disks/gluster_data
 EOF
 ) | tee ${my_user}.${vm_name}.deploy.log
