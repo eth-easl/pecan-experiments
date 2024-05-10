@@ -34,6 +34,32 @@ data_dir="gs://tfdata-imagenet-eu" # This scripts needs 2 subfolders: train, val
 
 train_epochs=90"
 '''
+prepare_retina_cmd = '''
+cd ~/ml_input_processing/experiments/ml/models/official/vision/detection
+
+pip install -r ~/ml_input_processing/experiments/ml/models/official/requirements.txt
+
+TPU_NAME="local"
+TPU_VM=true
+TPU_ADDRESS="local"
+DATA_DIR="gs://tfdata-datasets-eu/coco"
+TRAIN_FILE_PATTERN="$DATA_DIR/train-*"
+EVAL_FILE_PATTERN="$DATA_DIR/val-*"
+VAL_JSON_FILE="gs://tfdata-datasets-eu/coco/raw-data/annotations/instances_val2017.json"
+RESNET_CHECKPOINT="gs://cloud-tpu-checkpoints/retinanet/resnet50-checkpoint-2018-02-07"
+
+ITERS_PER_LOOP=1848 # 1848 steps = 1 epoch
+
+epochs=72 # default: 13, 72 is 2nd version
+total_steps=$(($epochs * $ITERS_PER_LOOP))
+eval=true
+
+save_checkpoint_freq=1
+
+model_dir="gs://otmraz-eu-logs/Retinanet/FINAL"
+log_out="main.log"
+export PYTHONPATH=$HOME/ml_input_processing/experiments/ml/models/
+'''
 
 pecan_cmd = '''
 export USE_AUTOORDER=True
@@ -54,15 +80,12 @@ export DISPATCHER_IP='None'
 log_out="colloc.log
 '''
 
-
 ResNet_cmd = '''
 python3 resnet_ctl_imagenet_main.py --enable_checkpoint_and_export=true --tpu=$tpu_name --model_dir=$model_dir --data_dir=$data_dir --batch_size=1024 --steps_per_loop=50 --train_epochs=$train_epochs --use_synthetic_data=false --dtype=fp32 --enable_eager=true --enable_tensorboard=true --distribution_strategy=tpu --log_steps=50 --single_l2_loss_op=true --verbosity=0 --skip_eval=true --use_tf_function=true --num_local_workers=$n_loc 2>&1 | tee $log_out
 '''
-
 Retina_cmd = '''
-
+python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_dir?}" --save_checkpoint_freq=$save_checkpoint_freq --mode=train --local_workers=$n_loc --params_override="{ type: retinanet, train: { checkpoint: { path: ${RESNET_CHECKPOINT?}, prefix: resnet50/ }, train_file_pattern: ${TRAIN_FILE_PATTERN?}, iterations_per_loop: ${ITERS_PER_LOOP}, total_steps: ${total_steps}}, eval: { val_json_file: ${VAL_JSON_FILE?}, eval_file_pattern: ${EVAL_FILE_PATTERN?}, num_steps_per_eval: ${ITERS_PER_LOOP} } }" 2>&1 | tee $log_out
 '''
-
 
 output_fig = '''fig8_ResNet50_v2-8.pdf'''
 
@@ -95,8 +118,6 @@ _, _, _ = get_exitcode_stdout_stderr(prepare_resnet_cmd)
 
 n_local = 10
 n_steps = 5000
-
-
 
 # Set correct service img
 file_lines = []
