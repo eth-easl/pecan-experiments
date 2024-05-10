@@ -6,7 +6,7 @@ To minimize end-to-end training cost, Pecan uses 2 policies:
 1) AutoPlacement, which distributes data prococessing workers between the client VM and additional remote worker nondes.
 2) AutoOrder, which reorders non-critical step in the input pipeline in order to minimize the overall required CPU cycles and increase throughput.
 
-Pecan builds on top of the [cachew](https://www.usenix.org/system/files/atc22-graur.pdf) data loading framework in [TensorFlow](https://github.com/tensorflow/tensorflow), extending it with the AutoPlacement and AutoOrder policies.
+Pecan builds on top of the [Cachew](https://www.usenix.org/system/files/atc22-graur.pdf) data loading framework in [TensorFlow](https://github.com/tensorflow/tensorflow), extending it with the AutoPlacement and AutoOrder policies.
 
 This repository contains instructions for deploying Pecan in Google Cloud and using the service to efficiently execute ML input data pipelines. To view the source code, please see our [Pecan source code repository](https://github.com/eth-easl/cachew/tree/oto-pecan). 
 
@@ -33,7 +33,7 @@ Clients fetch data from the workers that are assigned to them by the dispatcher.
 
 ### General Prerequisites
 
-Our scripts make extensive use of the `gcloud CLI` tool. As a consequence, this tool is a prerequisite for setting up VMs and running experiments. Please follow [this tutorial](https://cloud.google.com/sdk/docs/install) to install it. We additionally make use of the `gsutil` tool. To install it, please follow [this tutorial](https://cloud.google.com/storage/docs/gsutil_install). We also suggest that you use Python 3.9 when using Cachew. In this sense we recommend [PyEnv](https://github.com/pyenv/pyenv) as a means to install and manage multiple python versions and virtual environments.
+Our scripts make extensive use of the `gcloud CLI` tool. As a consequence, this tool is a prerequisite for setting up VMs and running experiments. Please follow [this tutorial](https://cloud.google.com/sdk/docs/install) to install it. We additionally make use of the `gsutil` tool. To install it, please follow [this tutorial](https://cloud.google.com/storage/docs/gsutil_install). We also suggest that you use Python 3.8 when using Pecan. In this sense we recommend [PyEnv](https://github.com/pyenv/pyenv) as a means to install and manage multiple python versions and virtual environments.
 
 
 ### Software Prerequisites for Full Service Deployment
@@ -59,7 +59,7 @@ Please ignore the *Manual Deployment* steps.
 
 #### Manual Deployment
 
-If you plan to deploy Cachew as a full service, you will need to set up a client VM which meets the following software dependencies:
+If you plan to deploy Pecan as a full service, you will need to set up a client VM which meets the following software dependencies:
 
 * Ubuntu 20.04 LTS (GNU/Linux 5.4.0-1072-gcp x86\_64) with root access
 * kubectl v1.30.0
@@ -75,7 +75,7 @@ For training models on GPUs, you will also need:
 
 To deploy the service itself, one requires:
 * A Docker image deploying Pecan builds with CPU-only support. This is used in the Pecan service for the Dispatcher and Workers
-* A client-only build of Cachew with GPU/TPU support
+* A client-only build of Pecan with GPU/TPU support
 
 A safe commit hash at which these can be built is `6bffdad771e7acd280b7aeba986d5fed2ff1d5f5`.
 
