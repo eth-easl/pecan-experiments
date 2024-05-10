@@ -5,6 +5,21 @@ from absl import flags
 
 import numpy as np
 
+"""
+Example usage:
+> python extract_costs.py \
+  --path=<path/to/log> \
+  --model=(resnet|retinanet) \
+  --accelerator=(v2|v3) \
+  --experiment_type=(collocated|pecan|cachew) \
+  --header=True
+
+Output: 
+
+> experiment,model,tpu_cost,worker_cost,remote_workers,local_workers,epoch_time,batches_sec
+> collocated,resnet,0.5998662431696817,0.42944969681465844,15,8,245.39982675123343,5.0978031099759615
+"""
+
 model_parameters = {
   "resnet": {
     "batch_size": 1024,
@@ -41,8 +56,6 @@ flags.DEFINE_boolean('infer_workers', True, 'If True, infers worker count from l
 flags.DEFINE_boolean('header', False, 'Print a CSV style header.')
 
 FLAGS = flags.FLAGS
-
-
 
 
 def main(argv):
