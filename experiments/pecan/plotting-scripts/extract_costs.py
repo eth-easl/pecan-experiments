@@ -68,7 +68,7 @@ def main(argv):
 
   assessing_deployment = False
   stable_remote_worker_count = 0
-  stable_local_worker_count= 0
+  stable_local_worker_count = 0
 
   # Get a stable set of sampled examples/second measurements
   with open(FLAGS.path, "r") as f:
