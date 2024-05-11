@@ -32,7 +32,7 @@ Clients fetch data from the workers that are assigned to them by the dispatcher.
 
 ### General Prerequisites
 
-Our scripts make extensive use of the `gcloud CLI` tool. As a consequence, this tool is a prerequisite for setting up VMs and running experiments. Please follow [this tutorial](https://cloud.google.com/sdk/docs/install) to install it. We additionally make use of the `gsutil` tool. To install it, please follow [this tutorial](https://cloud.google.com/storage/docs/gsutil_install). We also suggest that you use Python 3.8 when using Pecan. In this sense we recommend [PyEnv](https://github.com/pyenv/pyenv) as a means to install and manage multiple python versions and virtual environments.
+We assume that you have access to a Linux/macOS terminal, or WSL2. Our scripts make extensive use of the `gcloud CLI` tool. As a consequence, this tool is a prerequisite for setting up VMs and running experiments. Please follow [this tutorial](https://cloud.google.com/sdk/docs/install) to install it. We additionally make use of the `gsutil` tool. To install it, please follow [this tutorial](https://cloud.google.com/storage/docs/gsutil_install). We also suggest that you use Python 3.8 when using Pecan. In this sense we recommend [PyEnv](https://github.com/pyenv/pyenv) as a means to install and manage multiple python versions and virtual environments.
 
 ### Software Prerequisites for Full Service Deployment
 
@@ -50,10 +50,13 @@ If you are part of the ATC'24 AE committee, please follow the next instructions:
         1. `source atc_venv/bin/activate`
         1. `cd "pecan-experiments/experiments/pecan"`
         1. `./manage_cluster.sh start  # Wait and see if the cluster is successfully deployed`
+           If all goes well, you should see an output like in the image below
         1. `./manage_cluster.sh stop   # Once you are ready, use this command to take down the cluster`
 1. If you can successfully execute these steps then you are ready to execute experiments. Please go to [experiments/pecan](experiments/pecan) and follow the README there.
 
-Please ignore the *Manual Deployment* steps.
+<img src="../docs/figures/failed_gluster.png" height=240/>![successfull cluster start](Figures/successful_manage_clester_start.png)
+
+Please ignore the *Manual Deployment* steps (not part of the Artifact Evaluation).
 
 #### Manual Deployment
 
