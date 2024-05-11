@@ -93,7 +93,7 @@ python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_
 
 cost_extract_cmd = '''python plotting-scripts/extract_costs.py --path={0} --model={1} --accelerator=v2 --experiment_type={2} --header=True'''
 
-plot_cmd = '''python plotting-scripts/fig8.py -e final -m {0}, -t {1}, -c {2}'''
+plot_cmd = '''python plotting-scripts/fig8.py -e final -m {0} -t {1} -c {2}'''
 output_fig = '''fig8_ResNet50_v2-8.pdf'''
 
 def get_exitcode_stdout_stderr(cmd):
@@ -137,10 +137,11 @@ file_lines = []
 with open(service_yaml, 'r') as file:
     for line in file:
         if 'image: "' in line:
-            file_lines.append('image: "' + 'tf_oto:pecan')
+            file_lines.append('image: "' + pecan_img)
         else:
             file_lines.append(line)
-
+with open(service_yaml, 'w') as f:
+    f.write('\n'.join(file_lines))
 
 
 _, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
@@ -161,9 +162,11 @@ file_lines = []
 with open(service_yaml, 'r') as file:
     for line in file:
         if 'image: "' in line:
-            file_lines.append('image: "' + 'tf_oto:pecan')
+            file_lines.append('image: "' + cachew_img)
         else:
             file_lines.append(line)
+with open(service_yaml, 'w') as f:
+    f.write('\n'.join(file_lines))
 
 
 

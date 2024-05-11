@@ -2,3 +2,4 @@
 *.gpg
 atc_venv/*
 *.DS_Store
+experiments/pecan/atc_venv/*

@@ -22,8 +22,8 @@ VAD = -12       # Vertical annotation displacement
 parser.add_argument('-e', '--experiment', type=str, help='the experiment to plot', default='final') # Fig 1: 'intro' Fig 6: 'autoplacement' Fig 7: autoorder Fig 8: 'final'
 parser.add_argument('-r', '--repeats', type=int, help='number of repeats (not currently used)', default=1)
 parser.add_argument('-m', '--model', type=str, help='model used', default='resnet')
-parser.add_argument('-t', '--tpu_costs', type=float, help='tpu costs', nargs='+')
-parser.add_argument('-c', '--cpu_costs', type=float, help='cpu costs', nargs='+')
+parser.add_argument('-t', '--tpu_costs', help='tpu costs', nargs='+')
+parser.add_argument('-c', '--cpu_costs', help='cpu costs', nargs='+')
 
 args = parser.parse_args()
 
@@ -31,8 +31,11 @@ exp = args.experiment
 repeats = args.repeats
 model = args.model
 
-ResNet_TPU_AE_TPU_cost = args.tpu_costs # collocated, Cachew, Pecan
-ResNet_TPU_AE_worker_cost = args.cpu_costs # collocated, Cachew, Pecan
+ResNet_TPU_AE_TPU_cost = [float(cost) for cost in args.tpu_costs] # collocated, Cachew, Pecan
+ResNet_TPU_AE_worker_cost = [float(cost) for cost in args.cpu_costs] # collocated, Cachew, Pecan
+
+print(ResNet_TPU_AE_TPU_cost)
+print(ResNet_TPU_AE_worker_cost)
 
 plt.rcParams.update({'font.size': 12})
 matplotlib.use('TkAgg')
@@ -44,13 +47,13 @@ fig = plt.figure(figsize=(8, 4))
 #'''
 # ["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
 df0 = pd.DataFrame({ # No service
-    "TPU cost":[ResNet_TPU_AE_TPU_cost[0], 4.131955556, 0.823258044, 1.580724444, 8.25849596], # 4.5466666
-    "Worker cost":[ResNet_TPU_AE_worker_cost[0], 0.0, 0.0, 0.0, 0.0] # 0.0
+    "TPU cost":[float(ResNet_TPU_AE_TPU_cost[0]), 4.131955556, 0.823258044, 1.580724444, 8.25849596], # 4.5466666
+    "Worker cost":[float(ResNet_TPU_AE_worker_cost[0]), 0.0, 0.0, 0.0, 0.0] # 0.0
     }, index=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
 ).round(2)
 df1 = pd.DataFrame({ # Cachew
-    "TPU cost":[ResNet_TPU_AE_TPU_cost[1], 1.34416, 0.8225333333, 1.015259259, 0.65117052], # 0.5584464
-    "Worker cost":[ResNet_TPU_AE_worker_cost[1], 1.412802078, 0.1842457088, 0.1807664881, 0.9486052344] # 0.914125078
+    "TPU cost":[float(ResNet_TPU_AE_TPU_cost[1]), 1.34416, 0.8225333333, 1.015259259, 0.65117052], # 0.5584464
+    "Worker cost":[float(ResNet_TPU_AE_worker_cost[1]), 1.412802078, 0.1842457088, 0.1807664881, 0.9486052344] # 0.914125078
     }, index=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
 ).round(2)
 df2 = pd.DataFrame({ # AutoPlacement
@@ -64,8 +67,8 @@ df3 = pd.DataFrame({ # AutoOrder
     }, index=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
 ).round(2)
 df4 = pd.DataFrame({ # Pecan (AutoPlacement + AutoOrder)
-    "TPU cost":[ResNet_TPU_AE_TPU_cost[2], 1.412222222, 0.8211555556, 1.001, 0.59575956], # 0.5446576
-    "Worker cost":[ResNet_TPU_AE_worker_cost[2], 0.1216672153, 0.0, 0.0, 0.4918010739]
+    "TPU cost":[float(ResNet_TPU_AE_TPU_cost[2]), 1.412222222, 0.8211555556, 1.001, 0.59575956], # 0.5446576
+    "Worker cost":[float(ResNet_TPU_AE_worker_cost[2]), 0.1216672153, 0.0, 0.0, 0.4918010739]
     }, index=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"] # 0.04692389939
 ).round(2)
 df5 = pd.DataFrame({ # FastFlow
@@ -83,7 +86,7 @@ plt.grid(axis='y', linewidth=0.5)
 
 ###### Final eval graph
 if exp == 'final':
-   outputFile = 'fig8_' + model
+   outputFile = 'plots/fig8_' + model
    width = 0.23  # the width of the bars
    fs = 10
 
