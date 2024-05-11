@@ -85,7 +85,7 @@ resnet_dir = '''~/ml_input_processing/experiments/ml/models/official/vision/imag
 retina_dir = '''~/ml_input_processing/experiments/ml/models/official/vision/detection/'''
 
 ResNet_cmd = '''
-python3 resnet_ctl_imagenet_main.py --enable_checkpoint_and_export=true --tpu=$tpu_name --model_dir=$model_dir --data_dir=$data_dir --batch_size=1024 --steps_per_loop=50 --train_epochs=$train_epochs --use_synthetic_data=false --dtype=fp32 --enable_eager=true --enable_tensorboard=true --distribution_strategy=tpu --log_steps=50 --single_l2_loss_op=true --verbosity=0 --skip_eval=true --use_tf_function=true --num_local_workers=$n_loc 2>&1 | tee $log_out
+python3 resnet_ctl_imagenet_main.py --enable_checkpoint_and_export=true --tpu=$tpu_name --model_dir=$model_dir --data_dir=$data_dir --batch_size=1024 --steps_per_loop=500 --train_epochs=$train_epochs --use_synthetic_data=false --dtype=fp32 --enable_eager=true --enable_tensorboard=true --distribution_strategy=tpu --log_steps=50 --single_l2_loss_op=true --verbosity=0 --skip_eval=true --use_tf_function=true --num_local_workers=$n_loc 2>&1 | tee $log_out
 '''
 Retina_cmd = '''
 python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_dir?}" --save_checkpoint_freq=$save_checkpoint_freq --mode=train --local_workers=$n_loc --params_override="{ type: retinanet, train: { checkpoint: { path: ${RESNET_CHECKPOINT?}, prefix: resnet50/ }, train_file_pattern: ${TRAIN_FILE_PATTERN?}, iterations_per_loop: ${ITERS_PER_LOOP}, total_steps: ${total_steps}}, eval: { val_json_file: ${VAL_JSON_FILE?}, eval_file_pattern: ${EVAL_FILE_PATTERN?}, num_steps_per_eval: ${ITERS_PER_LOOP} } }" 2>&1 | tee $log_out
@@ -124,6 +124,17 @@ def get_costs(extractor_str):
     cpu_cost = vals.split(',')[3]
     return tpu_cost, cpu_cost
 
+def set_service_img(img):
+    file_lines = []
+    with open(service_yaml, 'r') as file:
+        for line in file:
+            if 'image: "' in line:
+                file_lines.append('image: "' + img)
+            else:
+                file_lines.append(line)
+    with open(service_yaml, 'w') as f:
+        f.write('\n'.join(file_lines))
+
 disp_ip = get_disp_ip()
 _, _, _ = get_exitcode_stdout_stderr(prepare_resnet_cmd)
 
@@ -131,18 +142,7 @@ _, _, _ = get_exitcode_stdout_stderr(prepare_resnet_cmd)
 
 n_local = 10
 n_steps = 5000
-
-# Set correct service img
-file_lines = []
-with open(service_yaml, 'r') as file:
-    for line in file:
-        if 'image: "' in line:
-            file_lines.append('image: "' + pecan_img)
-        else:
-            file_lines.append(line)
-with open(service_yaml, 'w') as f:
-    f.write('\n'.join(file_lines))
-
+set_service_img(pecan_img)
 
 _, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
 os.chdir(resnet_dir)
@@ -150,25 +150,11 @@ _, _, _ = get_exitcode_stdout_stderr(pecan_cmd)
 _, _, _ = get_exitcode_stdout_stderr(ResNet_cmd)
 os.chdir(exp_dir)
 
-
-
 ### b) Cachew
 
 n_local = 0
 n_steps = 5000
-
-# Set correct service img
-file_lines = []
-with open(service_yaml, 'r') as file:
-    for line in file:
-        if 'image: "' in line:
-            file_lines.append('image: "' + cachew_img)
-        else:
-            file_lines.append(line)
-with open(service_yaml, 'w') as f:
-    f.write('\n'.join(file_lines))
-
-
+set_service_img(cachew_img)
 
 _, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
 os.chdir(resnet_dir)
