@@ -21,20 +21,24 @@ VAD = -12       # Vertical annotation displacement
 
 parser.add_argument('-e', '--experiment', type=str, help='the experiment to plot', default='final') # Fig 1: 'intro' Fig 6: 'autoplacement' Fig 7: autoorder Fig 8: 'final'
 parser.add_argument('-r', '--repeats', type=int, help='number of repeats (not currently used)', default=1)
+parser.add_argument('-m', '--model', type=str, help='model used', default='resnet')
+parser.add_argument('-t', '--tpu_costs', type=float, help='tpu costs', nargs='+')
+parser.add_argument('-c', '--cpu_costs', type=float, help='cpu costs', nargs='+')
 
 args = parser.parse_args()
 
 exp = args.experiment
 repeats = args.repeats
+model = args.model
+
+ResNet_TPU_AE_TPU_cost = args.tpu_costs # collocated, Cachew, Pecan
+ResNet_TPU_AE_worker_cost = args.cpu_costs # collocated, Cachew, Pecan
 
 plt.rcParams.update({'font.size': 12})
 matplotlib.use('TkAgg')
 
 # Set up figure
 fig = plt.figure(figsize=(8, 4))
-
-ResNet_TPU_AE_TPU_cost = [0.0, 0.0, 0.0] # collocated, Cachew, Pecan
-ResNet_TPU_AE_worker_cost = [0.0, 0.0, 0.0] # collocated, Cachew, Pecan
 
 # Evaluation experiments (have data used in the actual paper)
 #'''
@@ -79,7 +83,7 @@ plt.grid(axis='y', linewidth=0.5)
 
 ###### Final eval graph
 if exp == 'final':
-   outputFile = 'final_results'
+   outputFile = 'fig8_' + model
    width = 0.23  # the width of the bars
    fs = 10
 
@@ -211,5 +215,5 @@ plt.subplots_adjust(left=0.1, right=0.99, top=0.975, bottom=0.1)
 plt.savefig(outputFile+'.jpg', dpi=2000, bbox_inches='tight')
 plt.savefig(outputFile+'.pdf', bbox_inches='tight')
 
-plt.show()
+#plt.show()
 print("DONE")
