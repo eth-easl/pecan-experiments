@@ -21,4 +21,4 @@ This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement 
 
 Below we offer the reference result:
 
-<img src="plots/sample_plots/fig8_ResNet50_v2-8.pdf" height=480/>
+<img src="../../Figures/failed_gluster.png" height=240/>
