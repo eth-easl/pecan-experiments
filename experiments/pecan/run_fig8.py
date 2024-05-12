@@ -2,7 +2,6 @@ import os, sys
 import subprocess as sp
 from subprocess import Popen, PIPE
 import shlex
-import fileinput
 
 '''
     a. **Running the input pipeline with Pecan** - producing data for the brown bars
@@ -12,11 +11,11 @@ import fileinput
 '''
 
 restart_workers_cmd = '''./manage_cluster.sh restart_service'''
-stop_workers_cmd = '''./manage_cluster stop'''
+stop_workers_cmd = '''./manage_cluster.sh stop'''
 service_yaml = '''default_config.yaml'''
 
-pecan_img = '''tf_oto:pecan'''
-cachew_img = '''tf_oto:pecan''' # Same as Pecan, we just don't spawn any local workers
+pecan_img = '''tf_oto:dan_fast_removal_with_parameters''' #'''tf_oto:pecan'''
+cachew_img = '''tf_oto:pecan''' # We use the pecan img, but we disable autoorder and simply spawn 0 remote workers
 
 resnet_model_dir = "gs://otmraz-eu-logs/Resnet/ImageNet/${USER}"
 retina_model_dir = "gs://otmraz-eu-logs/Retinanet/${USER}"
@@ -123,8 +122,6 @@ def set_service_img(img):
         f.write(''.join(file_lines))
 
 disp_ip = get_disp_ip()
-#sp.run(prepare_resnet_cmd, shell=True)
-#_, _, _ = get_exitcode_stdout_stderr(prepare_resnet_cmd)
 
 ### a) Pecan
 
@@ -132,11 +129,8 @@ n_local = 10
 n_steps = 5000
 set_service_img(pecan_img)
 
-#_, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
 sp.run(restart_workers_cmd, shell=True)
 os.chdir(resnet_dir)
-#_, _, _ = get_exitcode_stdout_stderr(pecan_cmd)
-#_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd)
 sp.run(prepare_resnet_cmd+pecan_cmd+ResNet_cmd_param.format(500, 8), shell=True)
 os.chdir(exp_dir)
 sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
@@ -147,12 +141,11 @@ n_local = 0
 n_steps = 5000
 set_service_img(cachew_img)
 
-#_, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
 sp.run(restart_workers_cmd, shell=True)
 os.chdir(resnet_dir)
-sp.run(prepare_resnet_cmd+cachew_cmd+ResNet_cmd_param.format(500, 5), shell=True)
+sp.run(prepare_resnet_cmd+cachew_cmd+ResNet_cmd_param.format(500, 4), shell=True)
 os.chdir(exp_dir)
-_, _, _ = get_exitcode_stdout_stderr(stop_workers_cmd)
+sp.run(stop_workers_cmd, shell=True)
 sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
 ### c) No service
@@ -168,8 +161,9 @@ sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
 ### d) Plotting
 os.chdir(exp_dir)
+# TODO: Replace the paths!!!!
 _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_resnet.log', 'resnet', 'pecan'))
-_, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_resnet.log', 'resnet', 'cachew'))
+_, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/cachew.log', 'resnet', 'cachew'))
 _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/colloc.log', 'resnet', 'collocated'))
 
 pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))
@@ -178,3 +172,4 @@ colloc_tpu, colloc_cpu = get_costs(colloc_out.decode("utf-8"))
 
 _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('resnet', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu])))
 
+print("Finished experiments!")
