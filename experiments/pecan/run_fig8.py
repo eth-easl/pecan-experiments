@@ -4,7 +4,6 @@ from subprocess import Popen, PIPE
 import shlex
 import fileinput
 
-
 '''
     a. **Running the input pipeline with Pecan** - producing data for the brown bars
     b. **Runnign the input pipeline with Cachew** - producing data for the orange bars
@@ -66,15 +65,15 @@ colloc_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='None'
-log_out="colloc.log"
+log_out="~/pecan-experiments/experiments/pecan/logs/colloc.log"
 '''
 
-exp_dir = '''~/pecan-experiments/experiments/pecan'''
+exp_dir = '''../../../../../../../../pecan-experiments/experiments/pecan''' # From resnet dir
 resnet_dir = '''../../../ml_input_processing/experiments/ml/models/official/vision/image_classification/resnet/'''
 retina_dir = '''../../../ml_input_processing/experiments/ml/models/official/vision/detection/'''
 
-ResNet_cmd = '''python3 resnet_ctl_imagenet_main.py --enable_checkpoint_and_export=true --tpu=$tpu_name --model_dir=$model_dir --data_dir=$data_dir --batch_size=1024 --steps_per_loop=500 --train_epochs=$train_epochs --use_synthetic_data=false --dtype=fp32 --enable_eager=true --enable_tensorboard=true --distribution_strategy=tpu --log_steps=50 --single_l2_loss_op=true --verbosity=0 --skip_eval=true --use_tf_function=true --num_local_workers=$n_loc 2>&1 | tee $log_out
-'''
+ResNet_cmd = '''python3 resnet_ctl_imagenet_main.py --enable_checkpoint_and_export=true --tpu=$tpu_name --model_dir=$model_dir --data_dir=$data_dir --batch_size=1024 --steps_per_loop=500 --train_epochs=$train_epochs --use_synthetic_data=false --dtype=fp32 --enable_eager=true --enable_tensorboard=true --distribution_strategy=tpu --log_steps=50 --single_l2_loss_op=true --verbosity=0 --skip_eval=true --use_tf_function=true --num_local_workers=$n_loc 2>&1 | tee $log_out'''
+ResNet_cmd_param = '''python3 resnet_ctl_imagenet_main.py --enable_checkpoint_and_export=true --tpu=$tpu_name --model_dir=$model_dir --data_dir=$data_dir --batch_size=1024 --steps_per_loop={0} --train_epochs={1} --use_synthetic_data=false --dtype=fp32 --enable_eager=true --enable_tensorboard=true --distribution_strategy=tpu --log_steps=50 --single_l2_loss_op=true --verbosity=0 --skip_eval=true --use_tf_function=true --num_local_workers=$n_loc 2>&1 | tee $log_out'''
 Retina_cmd = '''python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_dir?}" --save_checkpoint_freq=$save_checkpoint_freq --mode=train --local_workers=$n_loc --params_override="{ type: retinanet, train: { checkpoint: { path: ${RESNET_CHECKPOINT?}, prefix: resnet50/ }, train_file_pattern: ${TRAIN_FILE_PATTERN?}, iterations_per_loop: ${ITERS_PER_LOOP}, total_steps: ${total_steps}}, eval: { val_json_file: ${VAL_JSON_FILE?}, eval_file_pattern: ${EVAL_FILE_PATTERN?}, num_steps_per_eval: ${ITERS_PER_LOOP} } }" 2>&1 | tee $log_out
 '''
 
@@ -121,7 +120,7 @@ def set_service_img(img):
         f.write('\n'.join(file_lines))
 
 disp_ip = get_disp_ip()
-sp.run(prepare_resnet_cmd, shell=True)
+#sp.run(prepare_resnet_cmd, shell=True)
 #_, _, _ = get_exitcode_stdout_stderr(prepare_resnet_cmd)
 
 ### a) Pecan
@@ -132,8 +131,9 @@ set_service_img(pecan_img)
 
 _, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
 os.chdir(resnet_dir)
-_, _, _ = get_exitcode_stdout_stderr(pecan_cmd)
-_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd)
+#_, _, _ = get_exitcode_stdout_stderr(pecan_cmd)
+#_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd)
+sp.run(prepare_resnet_cmd+pecan_cmd+ResNet_cmd_param.format(500, 8), shell=True)
 os.chdir(exp_dir)
 sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
@@ -145,8 +145,7 @@ set_service_img(cachew_img)
 
 _, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
 os.chdir(resnet_dir)
-_, _, _ = get_exitcode_stdout_stderr(cachew_cmd)
-_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd)
+sp.run(prepare_resnet_cmd+pecan_cmd+ResNet_cmd_param.format(500, 5), shell=True)
 os.chdir(exp_dir)
 _, _, _ = get_exitcode_stdout_stderr(stop_workers_cmd)
 sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
@@ -158,21 +157,19 @@ n_steps = 5000
 disp_ip = 'None'
 
 os.chdir(resnet_dir)
-sp.run(colloc_cmd, shell=True)
-#_, _, _ = get_exitcode_stdout_stderr(colloc_cmd)
-sp.run(ResNet_cmd, shell=True)
-#_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd)
+sp.run(prepare_resnet_cmd+colloc_cmd+ResNet_cmd_param.format(250, 2), shell=True)
 os.chdir(exp_dir)
 sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
 ### d) Plotting
+os.chdir(exp_dir)
 _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_resnet.log', 'resnet', 'pecan'))
 _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_resnet.log', 'resnet', 'cachew'))
-_, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_resnet.log', 'resnet', 'collocated'))
+_, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/colloc.log', 'resnet', 'collocated'))
 
 pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))
 cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))
 colloc_tpu, colloc_cpu = get_costs(colloc_out.decode("utf-8"))
 
-_, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('resnet', ' '.join([pecan_tpu, cachew_tpu, colloc_tpu]), ' '.join([pecan_cpu, cachew_cpu, colloc_cpu])))
+_, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('resnet', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu])))
 
