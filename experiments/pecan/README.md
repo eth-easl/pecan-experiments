@@ -22,5 +22,3 @@ This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement 
 Below we offer the reference result:
 
 <img src="../pecan/plots/sample_plots/fig8_ResNet50_v2-8.jpg" height=240/>
-
-Experiments completed!

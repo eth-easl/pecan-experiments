@@ -1,0 +1,271 @@
+2024-05-11 18:54:49.179564: I tensorflow/core/tpu/tpu_api_dlsym_initializer.cc:116] Libtpu path is: libtpu.so
+2024-05-11 18:54:50.999897: I tensorflow/core/profiler/lib/profiler_session.cc:110] Profiler session initializing.
+2024-05-11 18:54:50.999938: I tensorflow/core/profiler/lib/profiler_session.cc:125] Profiler session started.
+/home/non-admin/atc_venv/lib/python3.8/site-packages/tensorflow_addons/utils/tfa_eol_msg.py:23: UserWarning: 
+
+TensorFlow Addons (TFA) has ended development and introduction of new features.
+TFA has entered a minimal maintenance and release mode until a planned end of life in May 2024.
+Please modify downstream libraries to take dependencies from other repositories in our TensorFlow community (e.g. Keras, Keras-CV, and Keras-NLP). 
+
+For more information see: https://github.com/tensorflow/addons/issues/2807 
+
+  warnings.warn(
+/home/non-admin/atc_venv/lib/python3.8/site-packages/tensorflow_addons/utils/ensure_tf_install.py:53: UserWarning: Tensorflow Addons supports using Python ops for all Tensorflow versions above or equal to 2.10.0 and strictly below 2.13.0 (nightly versions are not supported). 
+ The versions of TensorFlow you are currently using is 2.8.0 and is not supported. 
+Some things might work, some things might not.
+If you were to encounter a bug, do not file an issue.
+If you want to make sure you're using a tested and supported configuration, either change the TensorFlow version or the TensorFlow Addons's version. 
+You can find the compatibility matrix in TensorFlow Addon's readme:
+https://github.com/tensorflow/addons
+  warnings.warn(
+INFO:tensorflow:Deallocate tpu buffers before initializing tpu system.
+I0511 18:54:51.007135 140067919748160 tpu_strategy_util.py:57] Deallocate tpu buffers before initializing tpu system.
+INFO:tensorflow:Initializing the TPU system: local
+I0511 18:54:51.083888 140067919748160 tpu_strategy_util.py:81] Initializing the TPU system: local
+2024-05-11 18:54:51.105211: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-05-11 18:54:57.764736: I tensorflow/compiler/xla/service/service.cc:171] XLA service 0x6d371e0 initialized for platform TPU (this does not guarantee that XLA will be used). Devices:
+2024-05-11 18:54:57.764774: I tensorflow/compiler/xla/service/service.cc:179]   StreamExecutor device (0): TPU, 2a886c8
+2024-05-11 18:54:57.764781: I tensorflow/compiler/xla/service/service.cc:179]   StreamExecutor device (1): TPU, 2a886c8
+2024-05-11 18:54:57.764786: I tensorflow/compiler/xla/service/service.cc:179]   StreamExecutor device (2): TPU, 2a886c8
+2024-05-11 18:54:57.764791: I tensorflow/compiler/xla/service/service.cc:179]   StreamExecutor device (3): TPU, 2a886c8
+2024-05-11 18:54:57.764795: I tensorflow/compiler/xla/service/service.cc:179]   StreamExecutor device (4): TPU, 2a886c8
+2024-05-11 18:54:57.764799: I tensorflow/compiler/xla/service/service.cc:179]   StreamExecutor device (5): TPU, 2a886c8
+2024-05-11 18:54:57.764804: I tensorflow/compiler/xla/service/service.cc:179]   StreamExecutor device (6): TPU, 2a886c8
+2024-05-11 18:54:57.764808: I tensorflow/compiler/xla/service/service.cc:179]   StreamExecutor device (7): TPU, 2a886c8
+INFO:tensorflow:Finished initializing TPU system.
+I0511 18:55:08.957785 140067919748160 tpu_strategy_util.py:142] Finished initializing TPU system.
+INFO:tensorflow:Found TPU system:
+I0511 18:55:08.959414 140067919748160 tpu_system_metadata.py:155] Found TPU system:
+INFO:tensorflow:*** Num TPU Cores: 8
+I0511 18:55:08.959547 140067919748160 tpu_system_metadata.py:156] *** Num TPU Cores: 8
+INFO:tensorflow:*** Num TPU Workers: 1
+I0511 18:55:08.959851 140067919748160 tpu_system_metadata.py:157] *** Num TPU Workers: 1
+INFO:tensorflow:*** Num TPU Cores Per Worker: 8
+I0511 18:55:08.959902 140067919748160 tpu_system_metadata.py:158] *** Num TPU Cores Per Worker: 8
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:CPU:0, CPU, 0, 0)
+I0511 18:55:08.959953 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:CPU:0, CPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:0, TPU, 0, 0)
+I0511 18:55:08.960101 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:0, TPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:1, TPU, 0, 0)
+I0511 18:55:08.960150 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:1, TPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:2, TPU, 0, 0)
+I0511 18:55:08.960196 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:2, TPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:3, TPU, 0, 0)
+I0511 18:55:08.960237 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:3, TPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:4, TPU, 0, 0)
+I0511 18:55:08.960282 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:4, TPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:5, TPU, 0, 0)
+I0511 18:55:08.960327 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:5, TPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:6, TPU, 0, 0)
+I0511 18:55:08.960372 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:6, TPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:7, TPU, 0, 0)
+I0511 18:55:08.960416 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU:7, TPU, 0, 0)
+INFO:tensorflow:*** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU_SYSTEM:0, TPU_SYSTEM, 0, 0)
+I0511 18:55:08.960459 140067919748160 tpu_system_metadata.py:161] *** Available Device: _DeviceAttributes(/job:localhost/replica:0/task:0/device:TPU_SYSTEM:0, TPU_SYSTEM, 0, 0)
+I0511 18:55:08.960824 140067919748160 resnet_ctl_imagenet_main.py:164] Training 90 epochs, each epoch has 1251 steps, total steps: 112590; Eval 49 steps
+2024-05-11 18:55:09.498375: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:237] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2024-05-11 18:55:09.960673: I tensorflow/compiler/jit/xla_compilation_cache.cc:399] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+2024-05-11 18:55:09.977211: W tensorflow/compiler/tf2xla/kernels/random_ops.cc:167] Warning: Using tf.random.truncated_normal with XLA compilation will ignore seeds; consider using tf.random.stateless_truncated_normal instead if reproducible behavior is desired. TruncatedNormal
+WARNING:tensorflow:From /home/non-admin/ml_input_processing/experiments/ml/models/official/vision/image_classification/resnet/resnet_model.py:315: The name tf.keras.initializers.random_normal is deprecated. Please use tf.compat.v1.keras.initializers.random_normal instead.
+
+W0511 18:55:16.978777 140067919748160 module_wrapper.py:149] From /home/non-admin/ml_input_processing/experiments/ml/models/official/vision/image_classification/resnet/resnet_model.py:315: The name tf.keras.initializers.random_normal is deprecated. Please use tf.compat.v1.keras.initializers.random_normal instead.
+
+I0511 18:55:17.511873 140067919748160 imagenet_preprocessing.py:627] Sharding the dataset: input_pipeline_id=0 num_input_pipelines=1
+I0511 18:55:17.525914 140067919748160 dataset_ops.py:2333] ADDING NEW MAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+I0511 18:55:17.526036 140067919748160 dataset_ops.py:2381] It was the 1. map op in the user's original code
+I0511 18:55:17.850712 140067919748160 dataset_ops_utils.py:124] TensorSpec(shape=(), dtype=tf.string, name=None)
+I0511 18:55:17.850893 140067919748160 dataset_ops_utils.py:171] ['Elem_spec', 'string'] []
+I0511 18:55:17.850942 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:17.851007 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:17.851049 140067919748160 dataset_ops_utils.py:175] Inside should_reorder()
+I0511 18:55:17.851078 140067919748160 dataset_ops_utils.py:177] Not matching outer types
+I0511 18:55:17.851104 140067919748160 dataset_ops_utils.py:178] Elem_spec
+I0511 18:55:17.851134 140067919748160 dataset_ops_utils.py:179] tuple
+I0511 18:55:17.851165 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:17.851227 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:17.851262 140067919748160 dataset_ops_utils.py:124] TensorSpec(shape=(), dtype=tf.string, name=None)
+I0511 18:55:17.851308 140067919748160 dataset_ops_utils.py:171] ['Elem_spec', 'string'] []
+I0511 18:55:17.851340 140067919748160 dataset_ops_utils.py:288] Dimensions changed, do not reorder
+I0511 18:55:17.851372 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:17.851429 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:17.851463 140067919748160 dataset_ops_utils.py:124] TensorSpec(shape=(), dtype=tf.string, name=None)
+I0511 18:55:17.851507 140067919748160 dataset_ops_utils.py:171] ['Elem_spec', 'string'] []
+I0511 18:55:17.851539 140067919748160 dataset_ops_utils.py:266] Dimensions changed, do not reorder
+I0511 18:55:17.851568 140067919748160 dataset_ops.py:2527] Should we move upstream (2): 
+I0511 18:55:17.851601 140067919748160 dataset_ops.py:2528] False
+I0511 18:55:17.851630 140067919748160 dataset_ops.py:2529] Should we move downstream (2): 
+I0511 18:55:17.851659 140067919748160 dataset_ops.py:2530] False
+I0511 18:55:17.851690 140067919748160 dataset_ops.py:2538] Self is a: <class 'tensorflow.python.data.experimental.ops.service_cache_ops._MarkerDataset'>
+I0511 18:55:17.851750 140067919748160 dataset_ops.py:2539] False
+I0511 18:55:17.851794 140067919748160 dataset_ops.py:2333] ADDING NEW MAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+I0511 18:55:17.851832 140067919748160 dataset_ops.py:2381] It was the 2. map op in the user's original code
+I0511 18:55:18.743084 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.743278 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:18.743331 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.743392 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:18.743427 140067919748160 dataset_ops_utils.py:175] Inside should_reorder()
+I0511 18:55:18.743465 140067919748160 dataset_ops_utils.py:226] input output types were identical
+I0511 18:55:18.743502 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.743563 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:18.743598 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.743655 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:18.743690 140067919748160 dataset_ops_utils.py:292] In/out shapes were identical
+I0511 18:55:18.743734 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.743793 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:18.743826 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.743888 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:18.743923 140067919748160 dataset_ops_utils.py:270] In/out shapes were identical
+I0511 18:55:18.743960 140067919748160 dataset_ops.py:2527] Should we move upstream (2): 
+I0511 18:55:18.743986 140067919748160 dataset_ops.py:2528] False
+I0511 18:55:18.744011 140067919748160 dataset_ops.py:2529] Should we move downstream (2): 
+I0511 18:55:18.744040 140067919748160 dataset_ops.py:2530] False
+I0511 18:55:18.744070 140067919748160 dataset_ops.py:2538] Self is a: <class 'tensorflow.python.data.ops.dataset_ops.ParallelMapDataset'>
+I0511 18:55:18.744105 140067919748160 dataset_ops.py:2539] False
+I0511 18:55:18.744136 140067919748160 dataset_ops.py:2541] Checking if we should move the previous op downstream (2)
+I0511 18:55:18.744164 140067919748160 dataset_ops.py:2542] False
+I0511 18:55:18.744193 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.744252 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:18.744285 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(None, None, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.744341 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [None, None, 3]
+I0511 18:55:18.744386 140067919748160 dataset_ops.py:2333] ADDING NEW MAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+I0511 18:55:18.744424 140067919748160 dataset_ops.py:2381] It was the 3. map op in the user's original code
+I0511 18:55:18.819630 140067919748160 dataset_ops.py:2585] Keep_position was True
+I0511 18:55:18.819794 140067919748160 dataset_ops.py:2333] ADDING NEW MAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+I0511 18:55:18.819843 140067919748160 dataset_ops.py:2381] It was the 4. map op in the user's original code
+I0511 18:55:18.882607 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.882767 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:18.882813 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.882915 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:18.882956 140067919748160 dataset_ops_utils.py:175] Inside should_reorder()
+I0511 18:55:18.882996 140067919748160 dataset_ops_utils.py:226] input output types were identical
+I0511 18:55:18.883031 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.883096 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:18.883142 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.883198 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:18.883232 140067919748160 dataset_ops_utils.py:292] In/out shapes were identical
+I0511 18:55:18.883264 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.883319 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:18.883352 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.883406 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:18.883440 140067919748160 dataset_ops_utils.py:270] In/out shapes were identical
+I0511 18:55:18.883470 140067919748160 dataset_ops.py:2527] Should we move upstream (2): 
+I0511 18:55:18.883501 140067919748160 dataset_ops.py:2528] False
+I0511 18:55:18.883529 140067919748160 dataset_ops.py:2529] Should we move downstream (2): 
+I0511 18:55:18.883558 140067919748160 dataset_ops.py:2530] False
+I0511 18:55:18.883588 140067919748160 dataset_ops.py:2538] Self is a: <class 'tensorflow.python.data.ops.dataset_ops.ParallelMapDataset'>
+I0511 18:55:18.883619 140067919748160 dataset_ops.py:2539] False
+I0511 18:55:18.883649 140067919748160 dataset_ops.py:2541] Checking if we should move the previous op downstream (2)
+I0511 18:55:18.883677 140067919748160 dataset_ops.py:2542] False
+I0511 18:55:18.883719 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.883777 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:18.883810 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:18.883890 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:18.883935 140067919748160 dataset_ops.py:2333] ADDING NEW MAP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+I0511 18:55:18.883976 140067919748160 dataset_ops.py:2381] It was the 5. map op in the user's original code
+I0511 18:55:19.022245 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:19.022432 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:19.022480 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float16, name=None), TensorSpec(shape=(1,), dtype=tf.float32, name=None))
+I0511 18:55:19.022542 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float16', 'float32'] [224, 224, 3, 1]
+I0511 18:55:19.022583 140067919748160 dataset_ops_utils.py:175] Inside should_reorder()
+I0511 18:55:19.022616 140067919748160 dataset_ops_utils.py:186] different shape
+I0511 18:55:19.022649 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float16, name=None), TensorSpec(shape=(1,), dtype=tf.float32, name=None))
+I0511 18:55:19.022711 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float16', 'float32'] [224, 224, 3, 1]
+I0511 18:55:19.022746 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:19.022804 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:19.022838 140067919748160 dataset_ops_utils.py:288] Dimensions changed, do not reorder
+I0511 18:55:19.022874 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float16, name=None), TensorSpec(shape=(1,), dtype=tf.float32, name=None))
+I0511 18:55:19.022934 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float16', 'float32'] [224, 224, 3, 1]
+I0511 18:55:19.022968 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:19.023049 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:19.023089 140067919748160 dataset_ops_utils.py:266] Dimensions changed, do not reorder
+I0511 18:55:19.023123 140067919748160 dataset_ops.py:2527] Should we move upstream (2): 
+I0511 18:55:19.023155 140067919748160 dataset_ops.py:2528] False
+I0511 18:55:19.023186 140067919748160 dataset_ops.py:2529] Should we move downstream (2): 
+I0511 18:55:19.023217 140067919748160 dataset_ops.py:2530] False
+I0511 18:55:19.023250 140067919748160 dataset_ops.py:2538] Self is a: <class 'tensorflow.python.data.ops.dataset_ops.ParallelMapDataset'>
+I0511 18:55:19.023284 140067919748160 dataset_ops.py:2539] False
+I0511 18:55:19.023317 140067919748160 dataset_ops.py:2541] Checking if we should move the previous op downstream (2)
+I0511 18:55:19.023347 140067919748160 dataset_ops.py:2542] False
+I0511 18:55:19.023382 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float16, name=None), TensorSpec(shape=(1,), dtype=tf.float32, name=None))
+I0511 18:55:19.023448 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float16', 'float32'] [224, 224, 3, 1]
+I0511 18:55:19.023485 140067919748160 dataset_ops_utils.py:124] (TensorSpec(shape=(224, 224, 3), dtype=tf.float32, name=None), TensorSpec(shape=(), dtype=tf.int32, name=None))
+I0511 18:55:19.023547 140067919748160 dataset_ops_utils.py:171] ['tuple', 'float32', 'int32'] [224, 224, 3]
+I0511 18:55:19.023583 140067919748160 dataset_ops.py:2545] .. but the current op changes the shape, aborting! (2)
+I0511 18:55:19.083342 140067919748160 controller.py:398] restoring or initializing model...
+I0511 18:55:19.083482 140067919748160 controller.py:404] initialized model.
+I0511 18:55:19.085468 140067919748160 controller.py:236] train | step:      0 | training until step 112590...
+current_epoch : 0
+2024-05-11 18:55:19.344007: I tensorflow/core/data/rewrite_utils.cc:181] Before graph rewrites: 
+2024-05-11 18:55:19.344045: I tensorflow/core/data/rewrite_utils.cc:114] In apply rewrites
+2024-05-11 18:55:19.363205: I tensorflow/core/data/rewrite_utils.cc:185] After graph rewrites: 
+2024-05-11 18:55:19.371620: I tensorflow/core/data/root_dataset.cc:107] Setting model in root dataset iterator
+2024-05-11 18:55:29.251524: I tensorflow/core/tpu/graph_rewrite/encapsulate_tpu_computations_pass.cc:263] Subgraph fingerprint:682559924127095731
+2024-05-11 18:55:31.185788: I tensorflow/core/tpu/kernels/tpu_compilation_cache_interface.cc:435] TPU host compilation cache miss: cache_key(13030154354400887682), session_name()
+2024-05-11 18:55:50.166714: I tensorflow/core/tpu/kernels/tpu_compile_op_common.cc:180] Compilation of 13030154354400887682 with session name  took 18.980723036s and succeeded
+2024-05-11 18:55:50.278733: I tensorflow/core/tpu/kernels/tpu_compilation_cache_interface.cc:468] TPU host compilation cache: compilation complete for cache_key(13030154354400887682), session_name(), subgraph_key(std::string(property.function_name) = "cluster_while_body_23218_682559924127095731", property.function_library_fingerprint = 17164998040234282777, property.mlir_module_fingerprint = 0, property.num_replicas = 8, topology.chip_bounds().x = 2, topology.chip_bounds().y = 2, topology.chip_bounds().z = 1, topology.wrap().x = false, topology.wrap().y = false, topology.wrap().z = false, topology.MissingChipCount() = 0, std::string(property.shapes_prefix) = "", property.guaranteed_constants_size = 0, embedding_partitions_fingerprint = "1688352644216761960")
+2024-05-11 18:55:50.278799: I tensorflow/core/tpu/kernels/tpu_compilation_cache_interface.cc:534] After adding entry for key 13030154354400887682 with session_name  cache is 1 entries (145167112 bytes),  marked for eviction 0 entries (0 bytes).
+I0511 19:18:09.911497 140067919748160 keras_utils.py:145] TimeHistory: 1370.57 seconds, 373.57 examples/second between steps 0 and 500
+I0511 19:18:10.189703 140067919748160 controller.py:465] train | step:    500 | steps/sec:    0.4 | output: {'train_accuracy': 0.0049765627, 'train_loss': 1.5055827}
+I0511 19:18:15.084005 140067919748160 controller.py:494] saved checkpoint to gs://otmraz-eu-logs/Resnet/ImageNet/non-admin/ckpt-500.
+current_epoch : 0
+I0511 19:41:53.103508 140067919748160 keras_utils.py:145] TimeHistory: 1417.96 seconds, 361.08 examples/second between steps 500 and 1000
+I0511 19:41:53.380876 140067919748160 controller.py:465] train | step:   1000 | steps/sec:    0.4 | output: {'train_accuracy': 0.034712892, 'train_loss': 1.3527871}
+current_epoch : 0
+I0511 20:04:25.041843 140067919748160 keras_utils.py:145] TimeHistory: 1351.25 seconds, 378.91 examples/second between steps 1000 and 1500
+I0511 20:04:25.314362 140067919748160 controller.py:465] train | step:   1500 | steps/sec:    0.4 | output: {'train_accuracy': 0.08075976, 'train_loss': 1.1971965}
+current_epoch : 1
+I0511 20:25:18.036985 140067919748160 keras_utils.py:145] TimeHistory: 1252.31 seconds, 408.84 examples/second between steps 1500 and 2000
+I0511 20:25:18.273482 140067919748160 controller.py:465] train | step:   2000 | steps/sec:    0.4 | output: {'train_accuracy': 0.13275586, 'train_loss': 1.0455554}
+current_epoch : 1
+I0511 20:47:22.544468 140067919748160 keras_utils.py:145] TimeHistory: 1323.87 seconds, 386.74 examples/second between steps 2000 and 2500
+I0511 20:47:23.616571 140067919748160 controller.py:465] train | step:   2500 | steps/sec:    0.4 | output: {'train_accuracy': 0.18032226, 'train_loss': 0.90760875}
+current_epoch : 1
+I0511 21:08:39.590624 140067919748160 keras_utils.py:145] TimeHistory: 1275.55 seconds, 401.40 examples/second between steps 2500 and 3000
+I0511 21:08:39.964860 140067919748160 controller.py:465] train | step:   3000 | steps/sec:    0.4 | output: {'train_accuracy': 0.21723828, 'train_loss': 0.7954145}
+I0511 21:08:44.820068 140067919748160 controller.py:494] saved checkpoint to gs://otmraz-eu-logs/Resnet/ImageNet/non-admin/ckpt-3000.
+current_epoch : 2
+I0511 21:30:26.183391 140067919748160 keras_utils.py:145] TimeHistory: 1301.31 seconds, 393.45 examples/second between steps 3000 and 3500
+I0511 21:30:26.432745 140067919748160 controller.py:465] train | step:   3500 | steps/sec:    0.4 | output: {'train_accuracy': 0.24385743, 'train_loss': 0.7146137}
+current_epoch : 2
+I0511 21:52:55.715412 140067919748160 keras_utils.py:145] TimeHistory: 1348.91 seconds, 379.56 examples/second between steps 3500 and 4000
+I0511 21:52:55.935806 140067919748160 controller.py:465] train | step:   4000 | steps/sec:    0.4 | output: {'train_accuracy': 0.2776074, 'train_loss': 0.63349056}
+current_epoch : 3
+I0511 22:14:16.498625 140067919748160 keras_utils.py:145] TimeHistory: 1280.17 seconds, 399.95 examples/second between steps 4000 and 4500
+I0511 22:14:16.738584 140067919748160 controller.py:465] train | step:   4500 | steps/sec:    0.4 | output: {'train_accuracy': 0.29571095, 'train_loss': 0.5873664}
+current_epoch : 3
+I0511 22:36:27.526919 140067919748160 keras_utils.py:145] TimeHistory: 1330.39 seconds, 384.85 examples/second between steps 4500 and 5000
+I0511 22:36:27.754322 140067919748160 controller.py:465] train | step:   5000 | steps/sec:    0.4 | output: {'train_accuracy': 0.30866015, 'train_loss': 0.55845815}
+current_epoch : 3
+I0511 22:57:33.328293 140067919748160 keras_utils.py:145] TimeHistory: 1265.16 seconds, 404.69 examples/second between steps 5000 and 5500
+I0511 22:57:33.569109 140067919748160 controller.py:465] train | step:   5500 | steps/sec:    0.4 | output: {'train_accuracy': 0.3233086, 'train_loss': 0.5408147}
+I0511 22:57:38.224718 140067919748160 controller.py:494] saved checkpoint to gs://otmraz-eu-logs/Resnet/ImageNet/non-admin/ckpt-5500.
+current_epoch : 4
+I0511 23:19:15.763087 140067919748160 keras_utils.py:145] TimeHistory: 1297.46 seconds, 394.62 examples/second between steps 5500 and 6000
+I0511 23:19:16.016290 140067919748160 controller.py:465] train | step:   6000 | steps/sec:    0.4 | output: {'train_accuracy': 0.32840234, 'train_loss': 0.53678846}
+current_epoch : 4
+I0511 23:41:09.729740 140067919748160 keras_utils.py:145] TimeHistory: 1313.35 seconds, 389.84 examples/second between steps 6000 and 6500
+I0511 23:41:09.979671 140067919748160 controller.py:465] train | step:   6500 | steps/sec:    0.4 | output: {'train_accuracy': 0.3379551, 'train_loss': 0.531568}
+current_epoch : 5
+I0512 00:02:22.133033 140067919748160 keras_utils.py:145] TimeHistory: 1271.73 seconds, 402.60 examples/second between steps 6500 and 7000
+I0512 00:02:22.392719 140067919748160 controller.py:465] train | step:   7000 | steps/sec:    0.4 | output: {'train_accuracy': 0.34605467, 'train_loss': 0.5286542}
+current_epoch : 5
+I0512 00:24:14.181758 140067919748160 keras_utils.py:145] TimeHistory: 1311.39 seconds, 390.43 examples/second between steps 7000 and 7500
+I0512 00:24:14.446869 140067919748160 controller.py:465] train | step:   7500 | steps/sec:    0.4 | output: {'train_accuracy': 0.3551211, 'train_loss': 0.5230241}
+current_epoch : 5
+I0512 00:45:06.595812 140067919748160 keras_utils.py:145] TimeHistory: 1251.74 seconds, 409.03 examples/second between steps 7500 and 8000
+I0512 00:45:06.832628 140067919748160 controller.py:465] train | step:   8000 | steps/sec:    0.4 | output: {'train_accuracy': 0.36589453, 'train_loss': 0.51644593}
+I0512 00:45:10.873903 140067919748160 controller.py:494] saved checkpoint to gs://otmraz-eu-logs/Resnet/ImageNet/non-admin/ckpt-8000.
+current_epoch : 6
+I0512 01:06:57.796094 140067919748160 keras_utils.py:145] TimeHistory: 1306.87 seconds, 391.78 examples/second between steps 8000 and 8500
+I0512 01:06:58.046288 140067919748160 controller.py:465] train | step:   8500 | steps/sec:    0.4 | output: {'train_accuracy': 0.3688496, 'train_loss': 0.51593435}
+current_epoch : 6
+I0512 01:29:00.414210 140067919748160 keras_utils.py:145] TimeHistory: 1321.97 seconds, 387.30 examples/second between steps 8500 and 9000
+I0512 01:29:00.670530 140067919748160 controller.py:465] train | step:   9000 | steps/sec:    0.4 | output: {'train_accuracy': 0.3790879, 'train_loss': 0.5098354}
+current_epoch : 7
+I0512 01:50:25.830764 140067919748160 keras_utils.py:145] TimeHistory: 1284.77 seconds, 398.52 examples/second between steps 9000 and 9500
+I0512 01:50:26.233418 140067919748160 controller.py:465] train | step:   9500 | steps/sec:    0.4 | output: {'train_accuracy': 0.3808418, 'train_loss': 0.5105075}
+current_epoch : 7
+I0512 02:12:55.517372 140067919748160 keras_utils.py:145] TimeHistory: 1348.86 seconds, 379.58 examples/second between steps 9500 and 10000
+I0512 02:12:56.233166 140067919748160 controller.py:465] train | step:  10000 | steps/sec:    0.4 | output: {'train_accuracy': 0.38489062, 'train_loss': 0.50818235}
+current_epoch : 7
