@@ -11,7 +11,7 @@ import fileinput
     d. **Generating a plot with the cost of each config**. generating a plot `fig8_ResNet50_v2-8.pdf`
 '''
 
-restart_workers_cmd = '''./manage_cluster restart_service'''
+restart_workers_cmd = '''./manage_cluster.sh restart_service'''
 stop_workers_cmd = '''./manage_cluster stop'''
 service_yaml = '''default_config.yaml'''
 
@@ -53,19 +53,19 @@ pecan_cmd = '''
 export USE_AUTOORDER=True
 export n_loc=10
 export DISPATCHER_IP='disp'
-log_out="pecan.log"
+log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/pecan.log"
 '''
 cachew_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='disp'
-log_out="cachew.log"
+log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/cachew.log"
 '''
 colloc_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='None'
-log_out="~/pecan-experiments/experiments/pecan/logs/colloc.log"
+log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/colloc.log"
 '''
 
 exp_dir = '''../../../../../../../../pecan-experiments/experiments/pecan''' # From resnet dir
@@ -113,11 +113,14 @@ def set_service_img(img):
     with open(service_yaml, 'r') as file:
         for line in file:
             if 'image: "' in line:
-                file_lines.append('image: "' + img)
+                pref = line.split('"')[0]
+                suff = line.split('"')[2]
+                file_lines.append(pref + '"' + img + '"' + suff)
+                #file_lines.append('image: "' + img + '"\n')
             else:
-                file_lines.append(line.replace('\n',''))
+                file_lines.append(line)
     with open(service_yaml, 'w') as f:
-        f.write('\n'.join(file_lines))
+        f.write(''.join(file_lines))
 
 disp_ip = get_disp_ip()
 #sp.run(prepare_resnet_cmd, shell=True)
@@ -129,7 +132,8 @@ n_local = 10
 n_steps = 5000
 set_service_img(pecan_img)
 
-_, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
+#_, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
+sp.run(restart_workers_cmd, shell=True)
 os.chdir(resnet_dir)
 #_, _, _ = get_exitcode_stdout_stderr(pecan_cmd)
 #_, _, _ = get_exitcode_stdout_stderr(ResNet_cmd)
@@ -143,9 +147,10 @@ n_local = 0
 n_steps = 5000
 set_service_img(cachew_img)
 
-_, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
+#_, _, _ = get_exitcode_stdout_stderr(restart_workers_cmd)
+sp.run(restart_workers_cmd, shell=True)
 os.chdir(resnet_dir)
-sp.run(prepare_resnet_cmd+pecan_cmd+ResNet_cmd_param.format(500, 5), shell=True)
+sp.run(prepare_resnet_cmd+cachew_cmd+ResNet_cmd_param.format(500, 5), shell=True)
 os.chdir(exp_dir)
 _, _, _ = get_exitcode_stdout_stderr(stop_workers_cmd)
 sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
