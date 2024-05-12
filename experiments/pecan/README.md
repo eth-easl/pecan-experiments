@@ -19,6 +19,6 @@ This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement 
 
 **The key result here is that Pecan incurrs a significantly lower cost that collocated or Cachew setups.**
 
-Below we offer the reference result (TODO: update):
+Below we offer the reference result:
 
-<img src="plots/sample_plots/fig8_ResNet50_v2-8.pdf" height=480/>
+<img src="plots/sample_plots/fig8_ResNet50_v2-8.png" height=480/>
