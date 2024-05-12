@@ -162,8 +162,8 @@ sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 os.chdir(exp_dir)
 # TODO: Replace the paths!!!!
 _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_resnet.log', 'resnet', 'pecan'))
-_, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/cachew.log', 'resnet', 'cachew'))
-_, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/colloc.log', 'resnet', 'collocated'))
+_, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/resnet_cachew.log', 'resnet', 'cachew'))
+_, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/resnet_colloc.log', 'resnet', 'collocated'))
 
 pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))
 cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))

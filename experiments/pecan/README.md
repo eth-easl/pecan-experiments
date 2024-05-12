@@ -15,8 +15,10 @@ All of the below commands are intended to be executed on the remote TPU VM as de
 
 ### Reference Result and Variability
 
-This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement policices. Since both AutoScaling & AutoPlacement rely on (somewhat noisy) runtime metrics, expect some variability in the exact costs of Cachew and Pecan, in particular the remote worker costs. **The key result here is that Pecan incurrs a significantly lower cost that collocated or Cachew setups.**
+This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement policices. Both AutoScaling & AutoPlacement rely on (somewhat noisy) runtime metrics. The permormance is also impacted by the current load in Google Cloud. Hence it is expected to observe some variability in the exact costs of Cachew and Pecan, in particular the remote worker costs.
+
+**The key result here is that Pecan incurrs a significantly lower cost that collocated or Cachew setups.**
 
 Below we offer the reference result (TODO: update):
 
-<img src="reference-results/ref.png" height=480/>
+<img src="plots/sample_plots/fig8_ResNet50_v2-8.pdf" height=480/>
