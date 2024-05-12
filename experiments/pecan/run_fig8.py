@@ -14,7 +14,7 @@ restart_workers_cmd = '''./manage_cluster.sh restart_service'''
 stop_workers_cmd = '''./manage_cluster.sh stop'''
 service_yaml = '''default_config.yaml'''
 
-pecan_img = '''tf_oto:dan_fast_removal_with_parameters''' #'''tf_oto:pecan'''
+pecan_img = '''tf_oto:dan_fast_removal_100b''' #'''tf_oto:pecan'''
 cachew_img = '''tf_oto:pecan''' # We use the pecan img, but we disable autoorder and simply spawn 0 remote workers
 
 resnet_model_dir = "gs://otmraz-eu-logs/Resnet/ImageNet/${USER}"
@@ -79,7 +79,6 @@ Retina_cmd = '''python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --mod
 cost_extract_cmd = '''python plotting-scripts/extract_costs.py --path={0} --model={1} --accelerator=v2 --experiment_type={2} --header=True'''
 
 plot_cmd = '''python plotting-scripts/fig8.py -e final -m {0} -t {1} -c {2}'''
-output_fig = '''fig8_ResNet50_v2-8.pdf'''
 
 def get_exitcode_stdout_stderr(cmd):
     # Execute the external command and get its exitcode, stdout and stderr.
@@ -170,6 +169,6 @@ pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))
 cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))
 colloc_tpu, colloc_cpu = get_costs(colloc_out.decode("utf-8"))
 
-_, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('resnet', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu])))
+_, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('ResNet50_v2-8', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu])))
 
 print("Finished experiments!")

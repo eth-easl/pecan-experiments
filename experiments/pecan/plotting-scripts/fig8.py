@@ -21,7 +21,7 @@ VAD = -12       # Vertical annotation displacement
 
 parser.add_argument('-e', '--experiment', type=str, help='the experiment to plot', default='final') # Fig 1: 'intro' Fig 6: 'autoplacement' Fig 7: autoorder Fig 8: 'final'
 parser.add_argument('-r', '--repeats', type=int, help='number of repeats (not currently used)', default=1)
-parser.add_argument('-m', '--model', type=str, help='model used', default='resnet')
+parser.add_argument('-m', '--model', type=str, help='model used', default='ResNet50_v2-8')
 parser.add_argument('-t', '--tpu_costs', help='tpu costs', nargs='+')
 parser.add_argument('-c', '--cpu_costs', help='cpu costs', nargs='+')
 
@@ -31,11 +31,11 @@ exp = args.experiment
 repeats = args.repeats
 model = args.model
 
-ResNet_TPU_AE_TPU_cost = [float(cost) for cost in args.tpu_costs] # collocated, Cachew, Pecan
-ResNet_TPU_AE_worker_cost = [float(cost) for cost in args.cpu_costs] # collocated, Cachew, Pecan
+AE_TPU_cost = [float(cost) for cost in args.tpu_costs] # collocated, Cachew, Pecan
+AE_worker_cost = [float(cost) for cost in args.cpu_costs] # collocated, Cachew, Pecan
 
-print(ResNet_TPU_AE_TPU_cost)
-print(ResNet_TPU_AE_worker_cost)
+print(AE_TPU_cost)
+print(AE_worker_cost)
 
 plt.rcParams.update({'font.size': 12})
 matplotlib.use('TkAgg')
@@ -47,14 +47,14 @@ fig = plt.figure(figsize=(8, 4))
 #'''
 # ["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
 df0 = pd.DataFrame({ # No service
-    "TPU cost":[float(ResNet_TPU_AE_TPU_cost[0]), 4.131955556, 0.823258044, 1.580724444, 8.25849596], # 4.5466666
-    "Worker cost":[float(ResNet_TPU_AE_worker_cost[0]), 0.0, 0.0, 0.0, 0.0] # 0.0
-    }, index=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
+    "TPU cost":[float(AE_TPU_cost[0])], # 4.5466666
+    "Worker cost":[float(AE_worker_cost[0])] # 0.0
+    }, index=[model]
 ).round(2)
 df1 = pd.DataFrame({ # Cachew
-    "TPU cost":[float(ResNet_TPU_AE_TPU_cost[1]), 1.34416, 0.8225333333, 1.015259259, 0.65117052], # 0.5584464
-    "Worker cost":[float(ResNet_TPU_AE_worker_cost[1]), 1.412802078, 0.1842457088, 0.1807664881, 0.9486052344] # 0.914125078
-    }, index=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
+    "TPU cost":[float(AE_TPU_cost[1])], # 0.5584464
+    "Worker cost":[float(AE_worker_cost[1])] # 0.914125078
+    }, index=[model]
 ).round(2)
 df2 = pd.DataFrame({ # AutoPlacement
     "TPU cost":[0.571304456, 1.274444444, 0.8225333333, 1.029111111, 0.59598],
@@ -67,9 +67,9 @@ df3 = pd.DataFrame({ # AutoOrder
     }, index=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
 ).round(2)
 df4 = pd.DataFrame({ # Pecan (AutoPlacement + AutoOrder)
-    "TPU cost":[float(ResNet_TPU_AE_TPU_cost[2]), 1.412222222, 0.8211555556, 1.001, 0.59575956], # 0.5446576
-    "Worker cost":[float(ResNet_TPU_AE_worker_cost[2]), 0.1216672153, 0.0, 0.0, 0.4918010739]
-    }, index=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"] # 0.04692389939
+    "TPU cost":[float(AE_TPU_cost[2])], # 0.5446576
+    "Worker cost":[float(AE_worker_cost[2])]
+    }, index=[model]
 ).round(2)
 df5 = pd.DataFrame({ # FastFlow
     "TPU cost":[2.893333333, 2.0407424, 0.9675306667, 1.156222222, 4.44498648],
@@ -78,7 +78,7 @@ df5 = pd.DataFrame({ # FastFlow
 ).round(2)
 #'''
 
-bars=["ResNet50_v2-8", "SimCLR", "RetinaNet", "ASRTrans", "ResNet50_v3-8"]
+bars=[model]
 x = np.arange(len(bars))  # the label locations
 
 #fig, ax = plt.subplots()
@@ -102,19 +102,19 @@ if exp == 'final':
    for b in TPU1b:
       height = b.get_height()
       plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height+b.get_y()), xytext=(0, 2), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
-   TPU2a = plt.bar(x + 1*width/2, df2['TPU cost'], width=width, label='Cachew + AutoPlacement', linewidth=BET, edgecolor='#000000', color='#2ca02c', hatch="")
-   for b in TPU2a:
-      height = b.get_height()
-      plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height), xytext=(0, VAD), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
-   TPU2b = plt.bar(x + 1*width/2, df2['Worker cost'], bottom=df2['TPU cost'], width=width, linewidth=BET, edgecolor='#000000', color='#52b04c', hatch="//")
-   for b in TPU2b:
-      height = b.get_height()
-      plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height+b.get_y()), xytext=(0, 2), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
-   TPU4a = plt.bar(x + 3*width/2, df4['TPU cost'], width=width, label='Pecan', linewidth=BET, edgecolor='#000000', color='#8c564b', hatch="")
+   #TPU2a = plt.bar(x + 1*width/2, df2['TPU cost'], width=width, label='Cachew + AutoPlacement', linewidth=BET, edgecolor='#000000', color='#2ca02c', hatch="")
+   #for b in TPU2a:
+   #   height = b.get_height()
+   #   plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height), xytext=(0, VAD), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
+   #TPU2b = plt.bar(x + 1*width/2, df2['Worker cost'], bottom=df2['TPU cost'], width=width, linewidth=BET, edgecolor='#000000', color='#52b04c', hatch="//")
+   #for b in TPU2b:
+   #   height = b.get_height()
+   #   plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height+b.get_y()), xytext=(0, 2), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
+   TPU4a = plt.bar(x + 1*width/2, df4['TPU cost'], width=width, label='Pecan', linewidth=BET, edgecolor='#000000', color='#8c564b', hatch="")
    for b in TPU4a:
       height = b.get_height()
       plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height), xytext=(0, VAD), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
-   TPU4b = plt.bar(x + 3*width/2, df4['Worker cost'], bottom=df4['TPU cost'], width=width, linewidth=BET, edgecolor='#000000', color='#bca68b', hatch="//")
+   TPU4b = plt.bar(x + 1*width/2, df4['Worker cost'], bottom=df4['TPU cost'], width=width, linewidth=BET, edgecolor='#000000', color='#bca68b', hatch="//")
    for b in TPU4b:
       height = b.get_height()
       plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height+b.get_y()), xytext=(0, 2), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
@@ -127,7 +127,8 @@ if exp == 'final':
    pecan = mpatches.Patch(edgecolor='#000000', facecolor='#8c564b', label='Pecan AutoPlacement\n+ AutoOrder')
    tpu_cost = mpatches.Patch(edgecolor='#000000', facecolor='#ffffff', hatch='', label='TPU cost')
    work_cost = mpatches.Patch(edgecolor='#000000', facecolor='#ffffff', hatch='//', label='Remote worker cost')
-   plt.legend(handles=[no_service, cachew_AP, tpu_cost, cachew, pecan, work_cost], loc='upper left', ncol=2)
+   #plt.legend(handles=[no_service, cachew_AP, tpu_cost, cachew, pecan, work_cost], loc='upper left', ncol=2)
+   plt.legend(handles=[no_service, cachew, tpu_cost, pecan, work_cost], loc='upper left', ncol=2)
 
 ###### JUST AUTOORDER OR NOT
 if exp == 'autoorder':
