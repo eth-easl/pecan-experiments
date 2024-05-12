@@ -10,8 +10,6 @@ Pecan builds on top of the [Cachew](https://www.usenix.org/system/files/atc22-gr
 
 This repository contains instructions for deploying Pecan in Google Cloud and using the service to efficiently execute ML input data pipelines. To view the source code, please see our [Pecan source code repository](https://github.com/eth-easl/cachew/tree/oto-pecan). 
 
-__Should we make a separate Pecan repo as well rather than have it as a branch in Cachew?__
-
 ## Pecan System Architecture
 
 Pecan consists of a centralized dispatcher, a dynamic number of remote input data workers, and a disaggregated storage cluster for data caching. For the purpose of the artifact evaluation experiments we keep all components in the `europe-west4-a` zone.

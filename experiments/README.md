@@ -4,6 +4,7 @@ Pecan experiments
 This folder provides scripts and instructions for reproducing key results from our USENIX ATC'24 paper:
 
 1. Fig.8 Reproducing the ResNet50_v2-8 bars. In this experiment we compare the performance of collocated data preprocessing (blue bars), Cachew (orange bars), and Pecan (brown bars).
+1. Fig.8 Reproducing the RetinaNet bars. In this experiment we compare the performance of collocated data preprocessing (blue bars), Cachew (orange bars), and Pecan (brown bars).
 
 We use Google Cloud Compute Engine for all experiments and read input datasets from Google Cloud Storage buckets. Please see [this](https://docs.google.com/spreadsheets/d/1iwkurV_3AxQ7a_KcKKhgDBbO5r0rSQZxcjTqwgxE9Mg/edit?usp=sharing) spreadsheet for an estimate of the time and cost of running each of the above experiments.
 

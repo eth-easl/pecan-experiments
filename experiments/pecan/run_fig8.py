@@ -157,7 +157,12 @@ def set_service_img(img):
 
 disp_ip = get_disp_ip()
 
-if model == 'ResNet50_v2-':
+if model == 'short':
+    print('Runing Gerring Started experiment')
+
+    
+
+if model == 'ResNet50_v2-8':
     print('Running Resnet experiments')
     ### a) Pecan
 
