@@ -23,6 +23,6 @@ Below we offer the reference result:
 
 ![ScreenShot](https://github.com/eth-easl/pecan-experiments/blob/main/experiments/pecan/plots/sample_plots/fig8_ResNet50_v2-8.pdf)
 
-<img src="../pecan/plots/sample_plots/fig8_ResNet50_v2-8.pdf" height=240/>
+<img src="../pecan/plots/sample_plots/fig8_ResNet50_v2-8.png" height=240/>
 
 Experiments completed!
