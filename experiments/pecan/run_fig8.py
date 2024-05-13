@@ -120,7 +120,7 @@ retina_cmd_param = '''python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}"
 
 cost_extract_cmd = '''python plotting-scripts/extract_costs.py --path={0} --model={1} --accelerator=v2 --experiment_type={2} --header=True'''
 
-plot_cmd = '''python plotting-scripts/fig8.py -e final -m {0} -t {1} -c {2}'''
+plot_cmd = '''python plotting-scripts/fig8.py -e final -m {0} -t {1} -c {2} -o {3}'''
 
 def get_exitcode_stdout_stderr(cmd):
     # Execute the external command and get its exitcode, stdout and stderr.
@@ -199,7 +199,7 @@ if model == 'short':
     _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/resnet_getting_started.log', 'resnet', 'pecan'))
     pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))
 
-    sp.run(plot_cmd.format('ResNet50_v2-8', ' '.join(['0.0', '0.0', pecan_tpu]), ' '.join(['0.0', '0.0', pecan_cpu])), shell=True)
+    sp.run(plot_cmd.format('ResNet50_v2-8', ' '.join(['0.0', '0.0', pecan_tpu]), ' '.join(['0.0', '0.0', pecan_cpu]), 'plots/Getting_started'), shell=True)
 
     _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('ResNet50_v2-8', ' '.join(['0.0', '0.0', pecan_tpu]), ' '.join(['0.0', '0.0', pecan_cpu])))
 
@@ -249,7 +249,7 @@ if model == 'ResNet50_v2-8':
     cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))
     colloc_tpu, colloc_cpu = get_costs(colloc_out.decode("utf-8"))
 
-    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('ResNet50_v2-8', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu])))
+    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('ResNet50_v2-8', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu]), 'plots/ResNet50_v2-8'))
 
 elif model == 'retina':
     print('Running Retina experiments')
@@ -296,6 +296,6 @@ elif model == 'retina':
     cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))
     colloc_tpu, colloc_cpu = get_costs(colloc_out.decode("utf-8"))
 
-    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('Retina', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu])))
+    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('Retina', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu]), 'plots/RetinaNet'))
 
 print("Finished experiments!")

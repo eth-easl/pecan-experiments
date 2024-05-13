@@ -21,6 +21,7 @@ VAD = -12       # Vertical annotation displacement
 parser.add_argument('-e', '--experiment', type=str, help='the experiment to plot', default='final') # Fig 1: 'intro' Fig 6: 'autoplacement' Fig 7: autoorder Fig 8: 'final'
 parser.add_argument('-r', '--repeats', type=int, help='number of repeats (not currently used)', default=1)
 parser.add_argument('-m', '--model', type=str, help='model used', default='ResNet50_v2-8')
+parser.add_argument('-o', '--out_file', type=str, help='model used', default='plots/ResNet50_v2-8')
 parser.add_argument('-t', '--tpu_costs', help='tpu costs', nargs='+')
 parser.add_argument('-c', '--cpu_costs', help='cpu costs', nargs='+')
 
@@ -29,6 +30,7 @@ args = parser.parse_args()
 exp = args.experiment
 repeats = args.repeats
 model = args.model
+outputFile = args.out_file
 
 AE_TPU_cost = [float(cost) for cost in args.tpu_costs] # collocated, Cachew, Pecan
 AE_worker_cost = [float(cost) for cost in args.cpu_costs] # collocated, Cachew, Pecan
@@ -85,7 +87,7 @@ plt.grid(axis='y', linewidth=0.5)
 
 ###### Final eval graph
 if exp == 'final':
-   outputFile = 'plots/fig8_' + model
+   #outputFile = 'plots/fig8_' + model
    width = 0.23  # the width of the bars
    fs = 10
 
