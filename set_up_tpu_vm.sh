@@ -41,12 +41,12 @@ vm_name=${2:-"atc24-ae-${my_user}"}
     sudo mv ./kops /usr/local/bin/
 
     # jq
-    sudo apt-get install jq
+    sudo apt-get install -y jq
 
-    # GlusterFS
+    # GlusterFS - This section still causes trouble
     sudo add-apt-repository -y ppa:gluster/glusterfs-9
-    sudo apt update
-    sudo apt -y install glusterfs-client
+    sudo apt update -y
+    sudo apt install -y glusterfs-client
     sudo mkdir -p /mnt/disks/gluster_data
 EOF
 ) | tee ${my_user}.${vm_name}.deploy.log
