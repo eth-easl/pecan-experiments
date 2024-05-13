@@ -25,6 +25,10 @@ This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement 
 
 **The key result here is that Pecan incurrs a significantly lower cost that collocated or Cachew setups.**
 
-Below we offer the reference result:
+Below we offer the reference results:
 
+Hellow World experiment:
+<img src="../pecan/plots/sample_plots/Getting_started.pdf" height=240/>
+
+ResNet experiment:
 <img src="../pecan/plots/sample_plots/fig8_ResNet50_v2-8.jpg" height=240/>
