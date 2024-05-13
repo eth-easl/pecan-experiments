@@ -9,7 +9,7 @@ vm_name=${2:-"atc24-ae-${my_user}"}
     echo "alias python=python3" >> .bashrc
     source .bashrc
 
-    sudo apt install python3.8-venv
+    sudo apt -y install python3.8-venv
     python3 -m venv atc_venv
     source atc_venv/bin/activate
 
