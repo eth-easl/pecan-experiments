@@ -201,8 +201,6 @@ if model == 'short':
 
     sp.run(plot_cmd.format('ResNet50_v2-8', ' '.join(['0.0', '0.0', pecan_tpu]), ' '.join(['0.0', '0.0', pecan_cpu]), 'plots/Getting_started'), shell=True)
 
-    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('ResNet50_v2-8', ' '.join(['0.0', '0.0', pecan_tpu]), ' '.join(['0.0', '0.0', pecan_cpu])))
-
 if model == 'ResNet50_v2-8':
 
     print('Running Resnet experiments')
@@ -249,7 +247,7 @@ if model == 'ResNet50_v2-8':
     cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))
     colloc_tpu, colloc_cpu = get_costs(colloc_out.decode("utf-8"))
 
-    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('ResNet50_v2-8', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu]), 'plots/ResNet50_v2-8'))
+    sp.run(plot_cmd.format('ResNet50_v2-8', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu]), 'plots/ResNet50_v2-8'), shell=True)
 
 elif model == 'retina':
     print('Running Retina experiments')
@@ -296,6 +294,6 @@ elif model == 'retina':
     cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))
     colloc_tpu, colloc_cpu = get_costs(colloc_out.decode("utf-8"))
 
-    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('Retina', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu]), 'plots/RetinaNet'))
+    sp.run(plot_cmd.format('Retina', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu]), 'plots/RetinaNet'), shell=True)
 
 print("Finished experiments!")
