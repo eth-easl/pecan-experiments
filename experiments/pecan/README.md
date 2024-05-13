@@ -3,9 +3,9 @@ Figure 8: Collocated vs. Cachew vs. Pecan
 
 All commands below are intended to be executed on the remote TPU VM as deployed via the `create_tpu_vm.sh` script. If you have not already done so, `ssh` into it using `gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a atc24-ae-<TPU_name>`
 
-1. **Activate the Artifact Eval virtual environment** `source atc_venv/bin/activate`
-2. **Go to the experiments directory** `cd ~/experiments/pecan`
-3. **Activate tmux window**. Since some of our experiments can take long to run, make sure to set up a terminal multiplexer such as `tmux` in case your connection is interrupted. A very short introduction can be found at the end of this readme.
+1. **Activate tmux window**. Since some of our experiments can take long to run, make sure to set up a terminal multiplexer such as `tmux` in case your connection is interrupted. A very short introduction can be found at the end of this readme.
+2. **Activate the Artifact Eval virtual environment** `source ~/atc_venv/bin/activate`
+3. **Go to the experiments directory** `cd ~/experiments/pecan`
 4. **Starting the cluster**. Execute `./manage_cluster.sh start`. The script will create and setup a cluster of several virtual machines.
 5. **Checking the status** of the cluster by executing `./manage_cluster.sh status`. If all the status indicators show a green `[OK]`, carry on with the next step.
 6. **Run Hellow World example**. Run the following command to execute a short ResNet run to check everything is working correctly. `python run_fig8.py -m short` In this run all workers are used at all times and a single bar is produced in the plot `plots/Getting_started.pdf` (see our Reference Results below).

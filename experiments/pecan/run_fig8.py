@@ -271,6 +271,8 @@ elif model == 'retina':
     sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
     sp.run(cachew_retina_cmd.format(8)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    # Copy log over to the correct folder
+    shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_cachew.log'))
     os.chdir(exp_dir_from_retina)
     sp.run(stop_workers_cmd, shell=True)
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
@@ -280,7 +282,9 @@ elif model == 'retina':
     disp_ip = 'None'
 
     os.chdir(retina_dir)
-    sp.run(colloc_retina_cmd.format(2)+prepare_retina_cmd+retina_cmd_param, shell=True) # the param is actually the number of steps (here 2 epochs)
+    sp.run(colloc_retina_cmd.format(2)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    # Copy log over to the correct folder
+    shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_colloc.log'))
     os.chdir(exp_dir_from_retina)
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
