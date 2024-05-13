@@ -253,12 +253,12 @@ elif model == 'retina':
     print('Running Retina experiments')
 
     ### a) Pecan
-    n_local = 10
+    n_local = 6
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
-    sp.run(pecan_retina_cmd.format(10)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    sp.run(pecan_retina_cmd.format(6)+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
     shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_pecan.log'))
     os.chdir(exp_dir_from_retina)
@@ -270,7 +270,7 @@ elif model == 'retina':
 
     sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
-    sp.run(cachew_retina_cmd.format(8)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    sp.run(cachew_retina_cmd.format(4)+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
     shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_cachew.log'))
     os.chdir(exp_dir_from_retina)
