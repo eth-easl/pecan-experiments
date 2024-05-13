@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="256" height="256" src="Figures/pecan_logo.png" />
+</p>
+
 # Pecan: Cost-Efficient ML Data Preprocessing with Automatic Transformation Ordering and Hybrid Placement
 
 Pecan is a multi-tenant service for cost-efficient input data processing in machine learning jobs. 
@@ -54,7 +58,7 @@ If you are part of the ATC'24 AE committee, please follow the next instructions:
         1. `./manage_cluster.sh stop   # Once you are ready, use this command to take down the cluster`
 1. If you can successfully execute these steps then you are ready to execute experiments. Please go to [experiments/pecan](experiments/pecan) and follow the README there.
 
-<img src="../docs/figures/failed_gluster.png" height=240/>![successfull cluster start](Figures/successful_manage_clester_start.png)
+![successfull cluster start](Figures/successful_manage_clester_start.png)
 
 Please ignore the *Manual Deployment* steps (not part of the Artifact Evaluation).
 
