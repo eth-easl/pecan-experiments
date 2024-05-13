@@ -35,8 +35,8 @@ retina_model_dir = "gs://otmraz-eu-logs/Retinanet/${USER}"
 
 prepare_resnet_cmd = '''
 preprocessing_file="imagenet_preprocessing.py"
-export PYTHONPATH=$HOME/ml_input_processing/experiments/ml/models/
-export TF_DUMP_GRAPH_PREFIX=$HOME/ml_input_processing/experiments/ml/models/official/vision/image_classification/resnet/graph_dump.log
+export PYTHONPATH=$HOME/pecan-experiments/ml_input_processing/experiments/ml/models/
+export TF_DUMP_GRAPH_PREFIX=$HOME/pecan-experiments/ml_input_processing/experiments/ml/models/official/vision/image_classification/resnet/graph_dump.log
 tpu_name="local"
 model_dir="gs://otmraz-eu-logs/Resnet/ImageNet/${USER}"
 data_dir="gs://tfdata-imagenet-eu" # This scripts needs 2 subfolders: train, validation
@@ -58,32 +58,32 @@ eval=false
 save_checkpoint_freq=1
 model_dir="gs://otmraz-eu-logs/Retinanet/${USER}"
 log_out="main.log"
-export PYTHONPATH=$HOME/ml_input_processing/experiments/ml/models/
+export PYTHONPATH=$HOME/pecan-experiments/ml_input_processing/experiments/ml/models/
 '''
 
 getting_started_cmd = '''
 export USE_AUTOORDER=True
 export n_loc=10
 export DISPATCHER_IP='disp'
-log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_getting_started.log"
+log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_getting_started.log"
 '''
 pecan_cmd = '''
 export USE_AUTOORDER=True
 export n_loc=10
 export DISPATCHER_IP='disp'
-log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_pecan.log"
+log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_pecan.log"
 '''
 cachew_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='disp'
-log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_cachew.log"
+log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_cachew.log"
 '''
 colloc_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='None'
-log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_colloc.log"
+log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_colloc.log"
 '''
 
 pecan_retina_cmd = '''
@@ -91,27 +91,27 @@ export USE_AUTOORDER=True
 export n_loc=10
 export DISPATCHER_IP='disp'
 num_epochs={0}
-log_out="../../../../../../../pecan-experiments/experiments/pecan/logs/retina_pecan.log"
+log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_pecan.log"
 '''
 cachew_retina_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='disp'
 num_epochs={0}
-log_out="../../../../../../../pecan-experiments/experiments/pecan/logs/retina_cachew.log"
+log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_cachew.log"
 '''
 colloc_retina_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='None'
 num_epochs={0}
-log_out="../../../../../../../pecan-experiments/experiments/pecan/logs/retina_colloc.log"
+log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_colloc.log"
 '''
 
-exp_dir = '''../../../../../../../../pecan-experiments/experiments/pecan''' # From resnet dir
-exp_dir_from_retina = '''../../../../../../../pecan-experiments/experiments/pecan''' # From resnet dir
-resnet_dir = '''../../../ml_input_processing/experiments/ml/models/official/vision/image_classification/resnet/'''
-retina_dir = '''../../../ml_input_processing/experiments/ml/models/official/vision/detection/'''
+exp_dir = '''../../../../../../../../../pecan-experiments/experiments/pecan''' # From resnet dir
+exp_dir_from_retina = '''../../../../../../../../pecan-experiments/experiments/pecan''' # From resnet dir
+resnet_dir = '''../../ml_input_processing/experiments/ml/models/official/vision/image_classification/resnet/'''
+retina_dir = '''../../ml_input_processing/experiments/ml/models/official/vision/detection/'''
 
 ResNet_cmd_param = '''python3 resnet_ctl_imagenet_main.py --enable_checkpoint_and_export=true --tpu=$tpu_name --model_dir=$model_dir --data_dir=$data_dir --batch_size=1024 --steps_per_loop={0} --train_epochs={1} --use_synthetic_data=false --dtype=fp32 --enable_eager=true --enable_tensorboard=true --distribution_strategy=tpu --log_steps=50 --single_l2_loss_op=true --verbosity=0 --skip_eval=true --use_tf_function=true --num_local_workers=$n_loc 2>&1 | tee $log_out'''
 Retina_cmd = '''python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_dir?}" --save_checkpoint_freq=$save_checkpoint_freq --mode=train --local_workers=$n_loc --params_override="{ type: retinanet, train: { checkpoint: { path: ${RESNET_CHECKPOINT?}, prefix: resnet50/ }, train_file_pattern: ${TRAIN_FILE_PATTERN?}, iterations_per_loop: ${ITERS_PER_LOOP}, total_steps: ${total_steps}}, eval: { val_json_file: ${VAL_JSON_FILE?}, eval_file_pattern: ${EVAL_FILE_PATTERN?}, num_steps_per_eval: ${ITERS_PER_LOOP} } }" 2>&1 | tee $log_out'''
