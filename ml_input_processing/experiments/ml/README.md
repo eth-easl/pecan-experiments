@@ -1,0 +1,13 @@
+# ML Experiments
+
+## Table of models
+
+| Model        | Dataset                    | Code                                                                                                                                                      | Reference code                                                                      |
+| ------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| ResNet-50    | ImageNet (& Tiny ImageNet) | [GitLab](https://gitlab.inf.ethz.ch/OU-KLIMOVIC/easl/ml_input_processing/-/tree/master/experiments/ml/models/official/vision/image_classification/resnet) | [TF Model Garden](https://github.com/tensorflow/models)                             |
+| RetinaNet    | COCO                       | [GitLab](https://gitlab.inf.ethz.ch/OU-KLIMOVIC/easl/ml_input_processing/-/tree/master/experiments/ml/models/official/vision/detection)                   | [TF Model Garden](https://github.com/tensorflow/models)                             |
+| EfficientNet | ImageNet                   | [GitLab](https://gitlab.inf.ethz.ch/OU-KLIMOVIC/easl/ml_input_processing/-/tree/master/experiments/ml/automl/efficientnetv2)                   | [AutoML](https://github.com/google/automl/tree/master/efficientnetv2)               |
+| SimCLR       | ImageNet / CIFAR-10        | [GitLab](https://gitlab.inf.ethz.ch/OU-KLIMOVIC/easl/ml_input_processing/-/tree/master/experiments/ml/simclr)                                             | [Google Research](https://github.com/google-research/simclr/tree/master/tf2)        |
+| MobileNet    | ImageNet                   | [GitLab](https://gitlab.inf.ethz.ch/OU-KLIMOVIC/easl/ml_input_processing/-/tree/master/experiments/ml/mobilenet)                                          | Keras (model) + ResNet-50 pre-processing                                            |
+| ResNet-32    | CIFAR-10                   | [GitLab](https://gitlab.inf.ethz.ch/OU-KLIMOVIC/easl/ml_input_processing/-/tree/master/experiments/ml/resnet-cifar10)                                     | [gahaalt/resnets-in-tensorflow2](https://github.com/gahaalt/ResNets-in-tensorflow2) |
+| MaskRCNN     | COCO                       | [GitLab](https://gitlab.inf.ethz.ch/OU-KLIMOVIC/easl/ml_input_processing/-/tree/master/experiments/ml/models/official/vision/detection)                   | [TF Model Garden](https://github.com/tensorflow/models)                             |

@@ -178,7 +178,7 @@ def set_scaling_policy(scaling_policy):
 disp_ip = get_disp_ip()
 
 if model == 'short':
-    print('Runing Getting Started experiment')
+    print('Running Getting Started experiment')
 
     ### a) Pecan (with all workers used all the time)
 
