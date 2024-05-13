@@ -1,0 +1,90 @@
+I0512 13:24:44.248106 139741375958080 keras_utils.py:145] TimeHistory: 249.71 seconds, 64.07 examples/second between steps 0 and 250
+I0512 13:24:44.487355 139741375958080 distributed_executor.py:514] Train Step: 250/3696  / loss = {'total_loss': 1.5389952659606934, 'cls_loss': 0.7249456644058228, 'box_loss': 0.0073858886025846004, 'model_loss': 
+1.0942400693893433, 'l2_regularization_loss': 0.4447552561759949, 'learning_rate': 0.043349996} / training metric = {'total_loss': 1.5389952659606934, 'cls_loss': 0.7249456644058228, 'box_loss': 0.00738588860258460
+04, 'model_loss': 1.0942400693893433, 'l2_regularization_loss': 0.4447552561759949, 'learning_rate': 0.043349996}
+I0512 13:24:49.850471 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_250.ckpt-2
+I0512 13:24:49.850724 139741375958080 distributed_executor.py:490] Training until step 500...                                                                                                                         
+I0512 13:26:11.140422 139741375958080 keras_utils.py:145] TimeHistory: 81.29 seconds, 196.83 examples/second between steps 250 and 500
+I0512 13:26:11.252533 139741375958080 distributed_executor.py:514] Train Step: 500/3696  / loss = {'total_loss': 1.4554176330566406, 'cls_loss': 0.6798514723777771, 'box_loss': 0.006784205324947834, 'model_loss': 1
+.019061803817749, 'l2_regularization_loss': 0.4363557994365692, 'learning_rate': 0.08} / training metric = {'total_loss': 1.4554176330566406, 'cls_loss': 0.6798514723777771, 'box_loss': 0.006784205324947834, 'model
+_loss': 1.019061803817749, 'l2_regularization_loss': 0.4363557994365692, 'learning_rate': 0.08}                                                                                                                       
+I0512 13:26:16.285817 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_500.ckpt-3
+I0512 13:26:16.286110 139741375958080 distributed_executor.py:490] Training until step 750...                                                                                                                         
+I0512 13:27:37.228492 139741375958080 keras_utils.py:145] TimeHistory: 80.94 seconds, 197.67 examples/second between steps 500 and 750
+I0512 13:27:37.362144 139741375958080 distributed_executor.py:514] Train Step: 750/3696  / loss = {'total_loss': 1.2878974676132202, 'cls_loss': 0.5811663269996643, 'box_loss': 0.005612567998468876, 'model_loss': 0
+.8617947101593018, 'l2_regularization_loss': 0.4261026680469513, 'learning_rate': 0.08} / training metric = {'total_loss': 1.2878974676132202, 'cls_loss': 0.5811663269996643, 'box_loss': 0.005612567998468876, 'mode
+l_loss': 0.8617947101593018, 'l2_regularization_loss': 0.4261026680469513, 'learning_rate': 0.08}                                                                                                                     
+I0512 13:27:42.320154 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_750.ckpt-4
+I0512 13:27:42.320391 139741375958080 distributed_executor.py:490] Training until step 1000...                                                                                                                        
+I0512 13:29:04.652488 139741375958080 keras_utils.py:145] TimeHistory: 82.33 seconds, 194.34 examples/second between steps 750 and 1000
+I0512 13:29:04.762977 139741375958080 distributed_executor.py:514] Train Step: 1000/3696  / loss = {'total_loss': 1.2517768144607544, 'cls_loss': 0.570551872253418, 'box_loss': 0.005304287187755108, 'model_loss': 0
+.8357661962509155, 'l2_regularization_loss': 0.4160105586051941, 'learning_rate': 0.08} / training metric = {'total_loss': 1.2517768144607544, 'cls_loss': 0.570551872253418, 'box_loss': 0.005304287187755108, 'model
+_loss': 0.8357661962509155, 'l2_regularization_loss': 0.4160105586051941, 'learning_rate': 0.08}                                                                                                                      
+I0512 13:29:10.045075 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_1000.ckpt-5
+I0512 13:29:10.045324 139741375958080 distributed_executor.py:490] Training until step 1250...            
+I0512 13:30:30.990767 139741375958080 keras_utils.py:145] TimeHistory: 80.95 seconds, 197.66 examples/second between steps 1000 and 1250
+I0512 13:30:31.167252 139741375958080 distributed_executor.py:514] Train Step: 1250/3696  / loss = {'total_loss': 1.221397876739502, 'cls_loss': 0.5356671810150146, 'box_loss': 0.0055912756361067295, 'model_loss': 
+0.8152309656143188, 'l2_regularization_loss': 0.40616685152053833, 'learning_rate': 0.08} / training metric = {'total_loss': 1.221397876739502, 'cls_loss': 0.5356671810150146, 'box_loss': 0.0055912756361067295, 'mo
+del_loss': 0.8152309656143188, 'l2_regularization_loss': 0.40616685152053833, 'learning_rate': 0.08}                                                                                                                  
+I0512 13:30:36.460368 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_1250.ckpt-6
+I0512 13:30:36.460691 139741375958080 distributed_executor.py:490] Training until step 1500...                                                                                                                        
+I0512 13:31:57.420481 139741375958080 keras_utils.py:145] TimeHistory: 80.96 seconds, 197.63 examples/second between steps 1250 and 1500                                                                              
+I0512 13:31:57.536612 139741375958080 distributed_executor.py:514] Train Step: 1500/3696  / loss = {'total_loss': 1.129568099975586, 'cls_loss': 0.5178890228271484, 'box_loss': 0.0043115029111504555, 'model_loss': 
+0.733464241027832, 'l2_regularization_loss': 0.3961038291454315, 'learning_rate': 0.08} / training metric = {'total_loss': 1.129568099975586, 'cls_loss': 0.5178890228271484, 'box_loss': 0.0043115029111504555, 'mode
+l_loss': 0.733464241027832, 'l2_regularization_loss': 0.3961038291454315, 'learning_rate': 0.08}                                                                                                                      
+I0512 13:32:02.832291 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_1500.ckpt-7
+I0512 13:32:02.832570 139741375958080 distributed_executor.py:490] Training until step 1750...                                                                                                                        
+I0512 13:33:23.753566 139741375958080 keras_utils.py:145] TimeHistory: 80.92 seconds, 197.72 examples/second between steps 1500 and 1750          
+I0512 13:33:23.865177 139741375958080 distributed_executor.py:514] Train Step: 1750/3696  / loss = {'total_loss': 1.1245416402816772, 'cls_loss': 0.4929387867450714, 'box_loss': 0.004896755795925856, 'model_loss': 
+0.7377766370773315, 'l2_regularization_loss': 0.3867650628089905, 'learning_rate': 0.08} / training metric = {'total_loss': 1.1245416402816772, 'cls_loss': 0.4929387867450714, 'box_loss': 0.004896755795925856, 'mod
+el_loss': 0.7377766370773315, 'l2_regularization_loss': 0.3867650628089905, 'learning_rate': 0.08}                                                                                                                    
+I0512 13:33:28.804331 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_1750.ckpt-8                  
+I0512 13:33:28.804626 139741375958080 distributed_executor.py:490] Training until step 2000...                                                                                                                        
+I0512 13:34:49.718834 139741375958080 keras_utils.py:145] TimeHistory: 80.91 seconds, 197.74 examples/second between steps 1750 and 2000                                                                              
+I0512 13:34:49.828718 139741375958080 distributed_executor.py:514] Train Step: 2000/3696  / loss = {'total_loss': 1.0816855430603027, 'cls_loss': 0.47444209456443787, 'box_loss': 0.0045939162373542786, 'model_loss'
+: 0.704137921333313, 'l2_regularization_loss': 0.37754762172698975, 'learning_rate': 0.08} / training metric = {'total_loss': 1.0816855430603027, 'cls_loss': 0.47444209456443787, 'box_loss': 0.0045939162373542786, 
+'model_loss': 0.704137921333313, 'l2_regularization_loss': 0.37754762172698975, 'learning_rate': 0.08}                                                                                                                
+I0512 13:34:54.744001 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_2000.ckpt-9                                                         
+I0512 13:34:54.744284 139741375958080 distributed_executor.py:490] Training until step 2250...                                                                                                                        
+I0512 13:36:16.644105 139741375958080 keras_utils.py:145] TimeHistory: 81.90 seconds, 195.36 examples/second between steps 2000 and 2250                                      
+I0512 13:36:16.753689 139741375958080 distributed_executor.py:514] Train Step: 2250/3696  / loss = {'total_loss': 1.0338224172592163, 'cls_loss': 0.44546282291412354, 'box_loss': 0.004393512848764658, 'model_loss':
+ 0.6651384830474854, 'l2_regularization_loss': 0.3686838746070862, 'learning_rate': 0.08} / training metric = {'total_loss': 1.0338224172592163, 'cls_loss': 0.44546282291412354, 'box_loss': 0.004393512848764658, 'm
+odel_loss': 0.6651384830474854, 'l2_regularization_loss': 0.3686838746070862, 'learning_rate': 0.08}                                                                                                                  
+I0512 13:36:21.747780 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_2250.ckpt-10
+I0512 13:36:21.748045 139741375958080 distributed_executor.py:490] Training until step 2500...                                                                                                                        
+I0512 13:37:42.646260 139741375958080 keras_utils.py:145] TimeHistory: 80.90 seconds, 197.78 examples/second between steps 2250 and 2500                                                                              
+I0512 13:37:42.772291 139741375958080 distributed_executor.py:514] Train Step: 2500/3696  / loss = {'total_loss': 1.0963165760040283, 'cls_loss': 0.49098634719848633, 'box_loss': 0.0049010589718818665, 'model_loss'
+: 0.7360392808914185, 'l2_regularization_loss': 0.360277384519577, 'learning_rate': 0.08} / training metric = {'total_loss': 1.0963165760040283, 'cls_loss': 0.49098634719848633, 'box_loss': 0.0049010589718818665, '
+model_loss': 0.7360392808914185, 'l2_regularization_loss': 0.360277384519577, 'learning_rate': 0.08}                                                                                                                  
+I0512 13:37:47.924454 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_2500.ckpt-11
+I0512 13:37:47.924746 139741375958080 distributed_executor.py:490] Training until step 2750...                                                                                                                        
+I0512 13:39:08.861965 139741375958080 keras_utils.py:145] TimeHistory: 80.94 seconds, 197.68 examples/second between steps 2500 and 2750                                                                              
+I0512 13:39:09.001081 139741375958080 distributed_executor.py:514] Train Step: 2750/3696  / loss = {'total_loss': 1.056766390800476, 'cls_loss': 0.47860589623451233, 'box_loss': 0.004512779414653778, 'model_loss': 
+0.7042449116706848, 'l2_regularization_loss': 0.35252153873443604, 'learning_rate': 0.08} / training metric = {'total_loss': 1.056766390800476, 'cls_loss': 0.47860589623451233, 'box_loss': 0.004512779414653778, 'mo
+del_loss': 0.7042449116706848, 'l2_regularization_loss': 0.35252153873443604, 'learning_rate': 0.08}                                                                                                                  
+I0512 13:39:14.336664 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_2750.ckpt-12                                                        
+I0512 13:39:14.336897 139741375958080 distributed_executor.py:490] Training until step 3000...                                                                                                                        
+I0512 13:40:35.256720 139741375958080 keras_utils.py:145] TimeHistory: 80.92 seconds, 197.73 examples/second between steps 2750 and 3000                                                                              
+I0512 13:40:35.374812 139741375958080 distributed_executor.py:514] Train Step: 3000/3696  / loss = {'total_loss': 1.0531022548675537, 'cls_loss': 0.470329612493515, 'box_loss': 0.00474938377737999, 'model_loss': 0.
+7077988386154175, 'l2_regularization_loss': 0.3453035056591034, 'learning_rate': 0.08} / training metric = {'total_loss': 1.0531022548675537, 'cls_loss': 0.470329612493515, 'box_loss': 0.00474938377737999, 'model_l
+oss': 0.7077988386154175, 'l2_regularization_loss': 0.3453035056591034, 'learning_rate': 0.08}                                                                                                                        
+I0512 13:40:40.536037 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_3000.ckpt-13                                                        
+I0512 13:40:40.536309 139741375958080 distributed_executor.py:490] Training until step 3250...                                                                                                                        
+I0512 13:42:01.474279 139741375958080 keras_utils.py:145] TimeHistory: 80.94 seconds, 197.69 examples/second between steps 3000 and 3250                                                                              
+I0512 13:42:01.597400 139741375958080 distributed_executor.py:514] Train Step: 3250/3696  / loss = {'total_loss': 1.0584585666656494, 'cls_loss': 0.49078264832496643, 'box_loss': 0.004597959574311972, 'model_loss':
+ 0.7206805944442749, 'l2_regularization_loss': 0.3377780616283417, 'learning_rate': 0.08} / training metric = {'total_loss': 1.0584585666656494, 'cls_loss': 0.49078264832496643, 'box_loss': 0.004597959574311972, 'm
+odel_loss': 0.7206805944442749, 'l2_regularization_loss': 0.3377780616283417, 'learning_rate': 0.08}                                                                                                                  
+I0512 13:42:06.441091 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_3250.ckpt-14                                                        
+I0512 13:42:06.441469 139741375958080 distributed_executor.py:490] Training until step 3500...                                                                                                                        
+I0512 13:43:27.401485 139741375958080 keras_utils.py:145] TimeHistory: 80.96 seconds, 197.63 examples/second between steps 3250 and 3500
+I0512 13:43:27.512794 139741375958080 distributed_executor.py:514] Train Step: 3500/3696  / loss = {'total_loss': 0.9796702265739441, 'cls_loss': 0.4456348717212677, 'box_loss': 0.004061206243932247, 'model_loss': 
+0.648695170879364, 'l2_regularization_loss': 0.3309750556945801, 'learning_rate': 0.08} / training metric = {'total_loss': 0.9796702265739441, 'cls_loss': 0.4456348717212677, 'box_loss': 0.004061206243932247, 'mode
+l_loss': 0.648695170879364, 'l2_regularization_loss': 0.3309750556945801, 'learning_rate': 0.08}                                                                                                                      
+I0512 13:43:32.976765 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_3500.ckpt-15                                                        
+I0512 13:43:32.977003 139741375958080 distributed_executor.py:490] Training until step 3696...                                                                                                                        
+I0512 13:44:36.473420 139741375958080 keras_utils.py:145] TimeHistory: 63.50 seconds, 197.55 examples/second between steps 3500 and 3696                                                                              
+I0512 13:44:36.588500 139741375958080 distributed_executor.py:514] Train Step: 3696/3696  / loss = {'total_loss': 0.9649417400360107, 'cls_loss': 0.4280349016189575, 'box_loss': 0.004218047484755516, 'model_loss': 
+0.63893723487854, 'l2_regularization_loss': 0.3260044753551483, 'learning_rate': 0.08} / training metric = {'total_loss': 0.9649417400360107, 'cls_loss': 0.4280349016189575, 'box_loss': 0.004218047484755516, 'model
+_loss': 0.63893723487854, 'l2_regularization_loss': 0.3260044753551483, 'learning_rate': 0.08}                                                                                                                        
+I0512 13:44:41.607589 139741375958080 distributed_executor.py:48] Saving model as TF checkpoint: gs://otmraz-eu-logs/Retinanet/non-admin/ctl_step_3696.ckpt-16                                                        
+                                                                                                                                                                 

@@ -1,4 +1,4 @@
-*.log
+
 *.gpg
 atc_venv/*
 *.DS_Store
