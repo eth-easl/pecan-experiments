@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-import matplotlib
 import argparse
 
 parser = argparse.ArgumentParser(
@@ -38,7 +37,7 @@ print(AE_TPU_cost)
 print(AE_worker_cost)
 
 plt.rcParams.update({'font.size': 12})
-matplotlib.use('TkAgg')
+#matplotlib.use('TkAgg')
 
 # Set up figure
 fig = plt.figure(figsize=(8, 4))

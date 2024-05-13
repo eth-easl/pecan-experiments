@@ -40,10 +40,10 @@ If you are part of the ATC'24 AE committee, please follow the next instructions:
 
 1. Send us your (anonymous) email via HotCRP so we can add you to our GCP project
 1. Once added, make sure to set the correct project in `gcloud` using `gcloud config set project`
-1. Run the `create_tpu_vm.sh` to create your own TPU VM
-1. Run the `set_up_tpu_vm.sh` to set up the environment on the TPU VM
+1. Run the `create_tpu_vm.sh <TPU_name>` to create your own TPU VM
+1. Run the `set_up_tpu_vm.sh <TPU_name>` to set up the environment on the TPU VM
 1. Test if you are able to successfully deploy a Pecan service: 
-    1. `ssh` into your VM using `gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a atc24-ae-${USER}`
+    1. `ssh` into your VM using `gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a atc24-ae-<TPU_name>`
     1. On the VM run the following commands:
         1. `source atc_venv/bin/activate`
         1. `cd "pecan-experiments/experiments/pecan"`

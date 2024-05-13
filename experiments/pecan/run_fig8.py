@@ -2,6 +2,7 @@ import os
 import subprocess as sp
 from subprocess import Popen, PIPE
 import shlex
+import shutil
 import argparse
 
 parser = argparse.ArgumentParser(
@@ -60,6 +61,12 @@ log_out="main.log"
 export PYTHONPATH=$HOME/ml_input_processing/experiments/ml/models/
 '''
 
+getting_started_cmd = '''
+export USE_AUTOORDER=True
+export n_loc=10
+export DISPATCHER_IP='disp'
+log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_getting_started.log"
+'''
 pecan_cmd = '''
 export USE_AUTOORDER=True
 export n_loc=10
@@ -149,7 +156,20 @@ def set_service_img(img):
                 pref = line.split('"')[0]
                 suff = line.split('"')[2]
                 file_lines.append(pref + '"' + img + '"' + suff)
-                #file_lines.append('image: "' + img + '"\n')
+            else:
+                file_lines.append(line)
+    with open(service_yaml, 'w') as f:
+        f.write(''.join(file_lines))
+
+def set_scaling_policy(scaling_policy):
+    file_lines = []
+    with open(service_yaml, 'r') as file:
+        for line in file:
+            if 'scaling_policy: ' in line:
+                pref = line.split(' ')[0]
+                suff = line.split(' ')[1]
+                suff = str(scaling_policy) + suff[1:]
+                file_lines.append(pref + ' ' + suff)
             else:
                 file_lines.append(line)
     with open(service_yaml, 'w') as f:
@@ -158,14 +178,35 @@ def set_service_img(img):
 disp_ip = get_disp_ip()
 
 if model == 'short':
-    print('Runing Gerring Started experiment')
+    print('Runing Getting Started experiment')
 
-    
+    ### a) Pecan (with all workers used all the time)
+
+    n_local = 10
+    n_steps = 5000
+    set_service_img(pecan_img)
+    set_scaling_policy(2) # Fixed number of workers
+
+    sp.run(restart_workers_cmd, shell=True)
+    set_scaling_policy(3) # Fix the policy back for the 'real' experiments
+    os.chdir(resnet_dir)
+    sp.run(prepare_resnet_cmd+getting_started_cmd+ResNet_cmd_param.format(500, 2), shell=True)
+    os.chdir(exp_dir)
+    sp.run(stop_workers_cmd, shell=True)
+    sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
+
+    ### d) Plotting
+    _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/resnet_getting_started.log', 'resnet', 'pecan'))
+    pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))
+
+    sp.run(plot_cmd.format('ResNet50_v2-8', ' '.join(['0.0', '0.0', pecan_tpu]), ' '.join(['0.0', '0.0', pecan_cpu])), shell=True)
+
+    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('ResNet50_v2-8', ' '.join(['0.0', '0.0', pecan_tpu]), ' '.join(['0.0', '0.0', pecan_cpu])))
 
 if model == 'ResNet50_v2-8':
+
     print('Running Resnet experiments')
     ### a) Pecan
-
     n_local = 10
     n_steps = 5000
     set_service_img(pecan_img)
@@ -177,7 +218,6 @@ if model == 'ResNet50_v2-8':
     sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
     ### b) Cachew
-
     n_local = 0
     n_steps = 5000
     set_service_img(cachew_img)
@@ -190,7 +230,6 @@ if model == 'ResNet50_v2-8':
     sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
     ### c) No service
-
     n_local = 0
     n_steps = 5000
     disp_ip = 'None'
@@ -214,19 +253,20 @@ if model == 'ResNet50_v2-8':
 
 elif model == 'retina':
     print('Running Retina experiments')
-    ### a) Pecan
 
+    ### a) Pecan
     n_local = 10
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
     sp.run(pecan_retina_cmd.format(10)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    # Copy log over to the correct folder
+    shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_pecan.log'))
     os.chdir(exp_dir_from_retina)
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
     ### a) Cachew
-
     n_local = 0
     set_service_img(cachew_img)
 
@@ -238,7 +278,6 @@ elif model == 'retina':
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
     ### c) No service
-
     n_local = 0
     disp_ip = 'None'
 
@@ -249,14 +288,14 @@ elif model == 'retina':
 
     ### d) Plotting
     os.chdir(exp_dir)
-    _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/resnet_pecan.log', 'resnet', 'pecan'))
-    _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/resnet_cachew.log', 'resnet', 'cachew'))
-    _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/retina_colloc.log', 'resnet', 'collocated'))
+    _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_retina.log', 'retinanet', 'pecan'))
+    _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_retina.log', 'retinanet', 'cachew'))
+    _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/retina_colloc.log', 'retinanet', 'collocated'))
 
     pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))
     cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))
     colloc_tpu, colloc_cpu = get_costs(colloc_out.decode("utf-8"))
 
-    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('ResNet50_v2-8', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu])))
+    _, _, _ = get_exitcode_stdout_stderr(plot_cmd.format('Retina', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu])))
 
 print("Finished experiments!")
