@@ -57,7 +57,6 @@ total_steps=$(($epochs * $ITERS_PER_LOOP))
 eval=false
 save_checkpoint_freq=1
 model_dir="gs://otmraz-eu-logs/Retinanet/${USER}"
-log_out="main.log"
 export PYTHONPATH=$HOME/pecan-experiments/ml_input_processing/experiments/ml/models/
 '''
 
@@ -260,7 +259,7 @@ elif model == 'retina':
     os.chdir(retina_dir)
     sp.run(pecan_retina_cmd.format(6)+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
-    shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_pecan.log'))
+    #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_pecan.log'))
     os.chdir(exp_dir_from_retina)
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
@@ -272,7 +271,7 @@ elif model == 'retina':
     os.chdir(retina_dir)
     sp.run(cachew_retina_cmd.format(4)+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
-    shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_cachew.log'))
+    #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_cachew.log'))
     os.chdir(exp_dir_from_retina)
     sp.run(stop_workers_cmd, shell=True)
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
@@ -284,14 +283,14 @@ elif model == 'retina':
     os.chdir(retina_dir)
     sp.run(colloc_retina_cmd.format(2)+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
-    shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_colloc.log'))
+    #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_colloc.log'))
     os.chdir(exp_dir_from_retina)
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
     ### d) Plotting
     os.chdir(exp_dir)
-    _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_retina.log', 'retinanet', 'pecan'))
-    _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/sample_retina.log', 'retinanet', 'cachew'))
+    _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_pecan.log', 'retinanet', 'pecan'))
+    _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/retina_cachew.log', 'retinanet', 'cachew'))
     _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/retina_colloc.log', 'retinanet', 'collocated'))
 
     pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))

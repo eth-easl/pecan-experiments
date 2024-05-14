@@ -54,7 +54,7 @@ If you are part of the ATC'24 AE committee, please follow the next instructions:
         1. `source atc_venv/bin/activate`
         1. `cd "pecan-experiments/experiments/pecan"`
         1. `./manage_cluster.sh start  # Wait and see if the cluster is successfully deployed`
-           If all goes well, you should see an output like in the image below
+           If all goes well, you should see an output like in the image below. Otherwise the [troubleshooting section](https://github.com/eth-easl/pecan-experiments/tree/main/experiments#troubleshooting) may help you.
         1. `./manage_cluster.sh stop   # Once you are ready, use this command to take down the cluster`
 1. If you can successfully execute these steps then you are ready to execute experiments. Please go to [experiments/pecan](experiments/pecan) and follow the README there.
 
