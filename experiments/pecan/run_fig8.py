@@ -237,7 +237,6 @@ if model == 'ResNet50_v2-8':
     sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
     ### d) Plotting
-    os.chdir(exp_dir)
     _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/resnet_pecan.log', 'resnet', 'pecan'))
     _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/resnet_cachew.log', 'resnet', 'cachew'))
     _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/resnet_colloc.log', 'resnet', 'collocated'))
@@ -252,19 +251,17 @@ elif model == 'retina':
     print('Running Retina experiments')
 
     ### a) Pecan
-    n_local = 6
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
-    sp.run(pecan_retina_cmd.format(6)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    sp.run(pecan_retina_cmd.format(7)+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
     #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_pecan.log'))
     os.chdir(exp_dir_from_retina)
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
     ### a) Cachew
-    n_local = 0
     set_service_img(cachew_img)
 
     sp.run(restart_workers_cmd, shell=True)
@@ -277,7 +274,6 @@ elif model == 'retina':
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
     ### c) No service
-    n_local = 0
     disp_ip = 'None'
 
     os.chdir(retina_dir)
@@ -290,8 +286,8 @@ elif model == 'retina':
     ### d) Plotting
     os.chdir(exp_dir)
     _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_pecan.log', 'retinanet', 'pecan'))
-    _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/retina_cachew.log', 'retinanet', 'cachew'))
-    _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/sample_logs/retina_colloc.log', 'retinanet', 'collocated'))
+    _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_cachew.log', 'retinanet', 'cachew'))
+    _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_colloc.log', 'retinanet', 'collocated'))
 
     pecan_tpu, pecan_cpu = get_costs(pecan_out.decode("utf-8"))
     cachew_tpu, cachew_cpu = get_costs(cachew_out.decode("utf-8"))
