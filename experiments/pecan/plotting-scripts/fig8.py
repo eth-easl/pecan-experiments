@@ -91,15 +91,15 @@ if exp == 'final':
    width = 0.23  # the width of the bars
    fs = 10
 
-   TPU0a = plt.bar(x - 3*width/2, df0['TPU cost'], width=width, label='No Service)', linewidth=BET, edgecolor='#000000', color='#1f77b4', hatch="")
+   TPU0a = plt.bar(x - 2*width/2, df0['TPU cost'], width=width, label='No Service)', linewidth=BET, edgecolor='#000000', color='#1f77b4', hatch="")
    for b in TPU0a:
       height = b.get_height()
       plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height), xytext=(0, VAD), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
-   TPU1a = plt.bar(x - 1*width/2, df1['TPU cost'], width=width, label='Cachew', linewidth=BET, edgecolor='#000000', color='#ff7f0e', hatch="")
+   TPU1a = plt.bar(x - 0*width/2, df1['TPU cost'], width=width, label='Cachew', linewidth=BET, edgecolor='#000000', color='#ff7f0e', hatch="")
    for b in TPU1a:
       height = b.get_height()
       plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height), xytext=(0, VAD), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
-   TPU1b = plt.bar(x - 1*width/2, df1['Worker cost'], bottom=df1['TPU cost'], width=width, linewidth=BET, edgecolor='#000000', color='#ffaf18', hatch="//")
+   TPU1b = plt.bar(x - 0*width/2, df1['Worker cost'], bottom=df1['TPU cost'], width=width, linewidth=BET, edgecolor='#000000', color='#ffaf18', hatch="//")
    for b in TPU1b:
       height = b.get_height()
       plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height+b.get_y()), xytext=(0, 2), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
@@ -111,11 +111,11 @@ if exp == 'final':
    #for b in TPU2b:
    #   height = b.get_height()
    #   plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height+b.get_y()), xytext=(0, 2), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
-   TPU4a = plt.bar(x + 1*width/2, df4['TPU cost'], width=width, label='Pecan', linewidth=BET, edgecolor='#000000', color='#8c564b', hatch="")
+   TPU4a = plt.bar(x + 2*width/2, df4['TPU cost'], width=width, label='Pecan', linewidth=BET, edgecolor='#000000', color='#8c564b', hatch="")
    for b in TPU4a:
       height = b.get_height()
       plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height), xytext=(0, VAD), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
-   TPU4b = plt.bar(x + 1*width/2, df4['Worker cost'], bottom=df4['TPU cost'], width=width, linewidth=BET, edgecolor='#000000', color='#bca68b', hatch="//")
+   TPU4b = plt.bar(x + 2*width/2, df4['Worker cost'], bottom=df4['TPU cost'], width=width, linewidth=BET, edgecolor='#000000', color='#bca68b', hatch="//")
    for b in TPU4b:
       height = b.get_height()
       plt.annotate('{}'.format(round(height,2)), xy=(b.get_x() + b.get_width() / 2, height+b.get_y()), xytext=(0, 2), textcoords="offset points", ha='center', va='bottom', fontsize=fs)
