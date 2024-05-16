@@ -180,9 +180,6 @@ if model == 'short':
     print('Running Getting Started experiment')
 
     ### a) Pecan (with all workers used all the time)
-
-    n_local = 10
-    n_steps = 5000
     set_service_img(pecan_img)
     set_scaling_policy(2) # Fixed number of workers
 
@@ -204,19 +201,14 @@ if model == 'ResNet50_v2-8':
 
     print('Running Resnet experiments')
     ### a) Pecan
-    n_local = 10
-    n_steps = 5000
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)
-    os.chdir(resnet_dir)
     sp.run(prepare_resnet_cmd+pecan_cmd+ResNet_cmd_param.format(500, 8), shell=True)
     os.chdir(exp_dir)
     sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
     ### b) Cachew
-    n_local = 0
-    n_steps = 5000
     set_service_img(cachew_img)
 
     sp.run(restart_workers_cmd, shell=True)
@@ -227,8 +219,6 @@ if model == 'ResNet50_v2-8':
     sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
 
     ### c) No service
-    n_local = 0
-    n_steps = 5000
     disp_ip = 'None'
 
     os.chdir(resnet_dir)
