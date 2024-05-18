@@ -85,25 +85,28 @@ export DISPATCHER_IP='None'
 log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_colloc.log"
 '''
 
+pecan_retina_env_file_path = 'env/pecan_retina_env.sh'
+cachew_retina_env_file_path = 'env/cachew_retina_env.sh'
+colloc_retina_env_file_path = 'env/colloc_retina_env.sh'
 pecan_retina_cmd = '''
 export USE_AUTOORDER=True
 export n_loc=10
 export DISPATCHER_IP='disp'
-num_epochs={0}
-log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_pecan.log"
+export num_epochs=7
+export log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_pecan.log"
 '''
 cachew_retina_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='disp'
-num_epochs={0}
+num_epochs=4
 log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_cachew.log"
 '''
 colloc_retina_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
 export DISPATCHER_IP='None'
-num_epochs={0}
+num_epochs=2
 log_out="../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_colloc.log"
 '''
 
@@ -113,8 +116,6 @@ resnet_dir = '''../../ml_input_processing/experiments/ml/models/official/vision/
 retina_dir = '''../../ml_input_processing/experiments/ml/models/official/vision/detection/'''
 
 ResNet_cmd_param = '''python3 resnet_ctl_imagenet_main.py --enable_checkpoint_and_export=true --tpu=$tpu_name --model_dir=$model_dir --data_dir=$data_dir --batch_size=1024 --steps_per_loop={0} --train_epochs={1} --use_synthetic_data=false --dtype=fp32 --enable_eager=true --enable_tensorboard=true --distribution_strategy=tpu --log_steps=50 --single_l2_loss_op=true --verbosity=0 --skip_eval=true --use_tf_function=true --num_local_workers=$n_loc 2>&1 | tee $log_out'''
-Retina_cmd = '''python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_dir?}" --save_checkpoint_freq=$save_checkpoint_freq --mode=train --local_workers=$n_loc --params_override="{ type: retinanet, train: { checkpoint: { path: ${RESNET_CHECKPOINT?}, prefix: resnet50/ }, train_file_pattern: ${TRAIN_FILE_PATTERN?}, iterations_per_loop: ${ITERS_PER_LOOP}, total_steps: ${total_steps}}, eval: { val_json_file: ${VAL_JSON_FILE?}, eval_file_pattern: ${EVAL_FILE_PATTERN?}, num_steps_per_eval: ${ITERS_PER_LOOP} } }" 2>&1 | tee $log_out'''
-# This won't work
 retina_cmd_param = '''python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_dir?}" --save_checkpoint_freq=$save_checkpoint_freq --mode=train --local_workers=$n_loc --params_override="{ type: retinanet, train: { checkpoint: { path: ${RESNET_CHECKPOINT?}, prefix: resnet50/ }, train_file_pattern: ${TRAIN_FILE_PATTERN?}, iterations_per_loop: 250, total_steps: ${total_steps}}, eval: { val_json_file: ${VAL_JSON_FILE?}, eval_file_pattern: ${EVAL_FILE_PATTERN?}, num_steps_per_eval: ${ITERS_PER_LOOP} } }" 2>&1 | tee $log_out'''
 
 cost_extract_cmd = '''python plotting-scripts/extract_costs.py --path={0} --model={1} --accelerator=v2 --experiment_type={2} --header=True'''
@@ -244,8 +245,15 @@ elif model == 'retina':
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)
+    sp.call(['source', pecan_retina_env_file_path], shell=True)
+    num_epochs = os.getenv('num_epochs', '7')
+    log_out = os.getenv('log_out', '../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_pecan.log')
+    sp.call(['retina.sh', num_epochs, 'false', '1', os.getenv('model_dir', f"gs://otmraz-eu-logs/Retinanet/{os.getenv('USER')}"), log_out])
+
+
+    sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
-    sp.run(pecan_retina_cmd.format(7)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    sp.run(pecan_retina_cmd+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
     #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_pecan.log'))
     os.chdir(exp_dir_from_retina)
@@ -256,7 +264,7 @@ elif model == 'retina':
 
     sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
-    sp.run(cachew_retina_cmd.format(4)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    sp.run(cachew_retina_cmd+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
     #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_cachew.log'))
     os.chdir(exp_dir_from_retina)
@@ -267,7 +275,7 @@ elif model == 'retina':
     disp_ip = 'None'
 
     os.chdir(retina_dir)
-    sp.run(colloc_retina_cmd.format(2)+prepare_retina_cmd+retina_cmd_param, shell=True)
+    sp.run(colloc_retina_cmd+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
     #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_colloc.log'))
     os.chdir(exp_dir_from_retina)
