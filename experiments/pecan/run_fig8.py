@@ -2,7 +2,6 @@ import os
 import subprocess as sp
 from subprocess import Popen, PIPE
 import shlex
-import shutil
 import argparse
 
 parser = argparse.ArgumentParser(
@@ -16,12 +15,10 @@ args = parser.parse_args()
 
 model = args.model
 
-'''
-    a. **Running the input pipeline with Pecan** - producing data for the brown bars
-    b. **Runnign the input pipeline with Cachew** - producing data for the orange bars
-    c. **Runing the pipeline in the collocated mode** - producing data for the blue bars
-    d. **Generating a plot with the cost of each config**. generating a plot `fig8_ResNet50_v2-8.pdf`
-'''
+#    a. **Running the input pipeline with Pecan** - producing data for the brown bars
+#    b. **Runnign the input pipeline with Cachew** - producing data for the orange bars
+#    c. **Runing the pipeline in the collocated mode** - producing data for the blue bars
+#    d. **Generating a plot with the cost of each config**. generating a plot `fig8_ResNet50_v2-8.pdf`
 
 restart_workers_cmd = '''./manage_cluster.sh restart_service'''
 stop_workers_cmd = '''./manage_cluster.sh stop'''
@@ -245,13 +242,21 @@ elif model == 'retina':
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)
-    sp.call(['source', pecan_retina_env_file_path], shell=True)
-    num_epochs = os.getenv('num_epochs', '7')
-    log_out = os.getenv('log_out', '../../../../../../../../pecan-experiments/experiments/pecan/logs/retina_pecan.log')
-    sp.call(['retina.sh', num_epochs, 'false', '1', os.getenv('model_dir', f"gs://otmraz-eu-logs/Retinanet/{os.getenv('USER')}"), log_out])
+    sp.call(['bash', pecan_retina_env_file_path])
 
+    ### b) Cachew
+    set_service_img(cachew_img)
 
     sp.run(restart_workers_cmd, shell=True)
+    sp.call(['bash', cachew_retina_env_file_path])
+    sp.run(stop_workers_cmd, shell=True)
+
+    ### c) No service
+    disp_ip = 'None'
+
+    sp.call(['bash', colloc_retina_env_file_path])
+
+    '''sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
     sp.run(pecan_retina_cmd+prepare_retina_cmd+retina_cmd_param, shell=True)
     # Copy log over to the correct folder
@@ -259,7 +264,7 @@ elif model == 'retina':
     os.chdir(exp_dir_from_retina)
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
-    ### a) Cachew
+    ### b) Cachew
     set_service_img(cachew_img)
 
     sp.run(restart_workers_cmd, shell=True)
@@ -279,10 +284,10 @@ elif model == 'retina':
     # Copy log over to the correct folder
     #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_colloc.log'))
     os.chdir(exp_dir_from_retina)
-    sp.run('gsutil rm -r '+retina_model_dir, shell=True)
+    sp.run('gsutil rm -r '+retina_model_dir, shell=True)'''
 
     ### d) Plotting
-    os.chdir(exp_dir)
+    #os.chdir(exp_dir)
     _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_pecan.log', 'retinanet', 'pecan'))
     _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_cachew.log', 'retinanet', 'cachew'))
     _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_colloc.log', 'retinanet', 'collocated'))
