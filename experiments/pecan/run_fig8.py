@@ -15,10 +15,10 @@ args = parser.parse_args()
 
 model = args.model
 
-#    a. **Running the input pipeline with Pecan** - producing data for the brown bars
-#    b. **Running the input pipeline with Cachew** - producing data for the orange bars
-#    c. **Running the pipeline in the collocated mode** - producing data for the blue bars
-#    d. **Generating a plot with the cost of each config**. generating a plot, e.g., `fig8_ResNet50_v2-8.pdf`
+# a. **Run the input pipeline with Pecan** - producing data for the brown bars
+# b. **Run the input pipeline with Cachew** - producing data for the orange bars
+# c. **Run the pipeline in the collocated mode** - producing data for the blue bars
+# d. **Generate a plot with the cost of each config**. generating a plot, e.g., `fig8_ResNet50_v2-8.pdf`
 
 restart_workers_cmd = '''./manage_cluster.sh restart_service'''
 stop_workers_cmd = '''./manage_cluster.sh stop'''
@@ -64,15 +64,15 @@ export DISPATCHER_IP='disp'
 log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_getting_started.log"
 '''
 pecan_cmd = '''
-export USE_AUTOORDER=True
-export n_loc=10
-export DISPATCHER_IP='disp'
+export USE_AUTOORDER=False
+export n_loc=0
+export DISPATCHER_IP='None'
 log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_pecan.log"
 '''
 cachew_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
-export DISPATCHER_IP='disp'
+export DISPATCHER_IP='None'
 log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_cachew.log"
 '''
 colloc_cmd = '''
@@ -243,60 +243,7 @@ elif model == 'retina':
     sp.call(['bash', 'retina.sh'])
     sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
-    '''### a) Pecan
-    set_service_img(pecan_img)
-
-    sp.run(restart_workers_cmd, shell=True)
-
-    process = sp.Popen(['bash', pecan_retina_env_file_path], stdout=sp.PIPE, stderr=sp.PIPE, text=True)
-    stdout, stderr = process.communicate()
-
-    sp.call(['bash', pecan_retina_env_file_path])
-
-    ### b) Cachew
-    set_service_img(cachew_img)
-
-    sp.run(restart_workers_cmd, shell=True)
-    sp.call(['bash', cachew_retina_env_file_path])
-    sp.run(stop_workers_cmd, shell=True)
-
-    ### c) No service
-    disp_ip = 'None'
-
-    sp.call(['bash', colloc_retina_env_file_path])'''
-
-    '''sp.run(restart_workers_cmd, shell=True)
-    os.chdir(retina_dir)
-    sp.run(pecan_retina_cmd+prepare_retina_cmd+retina_cmd_param, shell=True)
-    # Copy log over to the correct folder
-    #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_pecan.log'))
-    os.chdir(exp_dir_from_retina)
-    sp.run('gsutil rm -r '+retina_model_dir, shell=True)
-
-    ### b) Cachew
-    set_service_img(cachew_img)
-
-    sp.run(restart_workers_cmd, shell=True)
-    os.chdir(retina_dir)
-    sp.run(cachew_retina_cmd+prepare_retina_cmd+retina_cmd_param, shell=True)
-    # Copy log over to the correct folder
-    #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_cachew.log'))
-    os.chdir(exp_dir_from_retina)
-    sp.run(stop_workers_cmd, shell=True)
-    sp.run('gsutil rm -r '+retina_model_dir, shell=True)
-
-    ### c) No service
-    disp_ip = 'None'
-
-    os.chdir(retina_dir)
-    sp.run(colloc_retina_cmd+prepare_retina_cmd+retina_cmd_param, shell=True)
-    # Copy log over to the correct folder
-    #shutil.copyfile('main.log', os.path.join(exp_dir_from_retina, 'logs/retina_colloc.log'))
-    os.chdir(exp_dir_from_retina)
-    sp.run('gsutil rm -r '+retina_model_dir, shell=True)'''
-
     ### d) Plotting
-    #os.chdir(exp_dir)
     _, pecan_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_pecan.log', 'retinanet', 'pecan'))
     _, cachew_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_cachew.log', 'retinanet', 'cachew'))
     _, colloc_out, _ = get_exitcode_stdout_stderr(cost_extract_cmd.format('logs/retina_colloc.log', 'retinanet', 'collocated'))
