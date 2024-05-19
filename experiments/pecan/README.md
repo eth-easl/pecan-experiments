@@ -27,11 +27,13 @@ Due to the way in which the RetinaNet model was constructed, it must be run dirr
 2. **Go to the experiments directory** `cd ~/pecan-experiments/experiments/pecan`
 3. **Starting the cluster**. Execute `./manage_cluster.sh start`. The script will create and setup a cluster of several virtual machines.
 4. **Checking the status** of the cluster by executing `./manage_cluster.sh status`. If all the status indicators show a green `[OK]`, carry on with the next step.
-5. **Run RetinaNet experiment**. Use `python run_fig8.py -m retina &` More concretely this script does the following:
+5. **Run RetinaNet experiment**. Use `nohup python run_fig8.py -m retina > output.log 2>&1 &` More concretely this script does the following:
     a. **Run the input pipeline with Pecan** - producing data for the brown bars
     b. **Run the input pipeline with Cachew** - producing data for the orange bars
     c. **Run the pipeline in the collocated mode** - producing data for the blue bars
     d. **Generate a plot with the cost of each config** - generating a plot `plots/RetinaNet.pdf`
+
+You are free close the window now. When you come back to check, check that the `run_fig8.py` script has finished. If you run `ps -aux | grep run_fig8` there should be no entry corresponding to the script. You can then find the plot in `plots/RetinaNet.pdf`.
 
 We use Google Cloud Compute Engine for all experiments and read input datasets from Google Cloud Storage buckets. Please see [this](https://docs.google.com/spreadsheets/d/1iwkurV_3AxQ7a_KcKKhgDBbO5r0rSQZxcjTqwgxE9Mg/edit?usp=sharing) spreadsheet for an estimate of the time and cost of running each of the above experiments.
 
