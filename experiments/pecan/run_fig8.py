@@ -16,9 +16,9 @@ args = parser.parse_args()
 model = args.model
 
 #    a. **Running the input pipeline with Pecan** - producing data for the brown bars
-#    b. **Runnign the input pipeline with Cachew** - producing data for the orange bars
-#    c. **Runing the pipeline in the collocated mode** - producing data for the blue bars
-#    d. **Generating a plot with the cost of each config**. generating a plot `fig8_ResNet50_v2-8.pdf`
+#    b. **Running the input pipeline with Cachew** - producing data for the orange bars
+#    c. **Running the pipeline in the collocated mode** - producing data for the blue bars
+#    d. **Generating a plot with the cost of each config**. generating a plot, e.g., `fig8_ResNet50_v2-8.pdf`
 
 restart_workers_cmd = '''./manage_cluster.sh restart_service'''
 stop_workers_cmd = '''./manage_cluster.sh stop'''
@@ -236,12 +236,16 @@ if model == 'ResNet50_v2-8':
     sp.run(plot_cmd.format('ResNet50', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu]), 'plots/ResNet50_v2-8'), shell=True)
 
 elif model == 'retina':
-    print('Running Retina experiments')
+    '''print('Running Retina experiments')
 
     ### a) Pecan
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)
+
+    process = sp.Popen(['bash', pecan_retina_env_file_path], stdout=sp.PIPE, stderr=sp.PIPE, text=True)
+    stdout, stderr = process.communicate()
+
     sp.call(['bash', pecan_retina_env_file_path])
 
     ### b) Cachew
@@ -254,7 +258,7 @@ elif model == 'retina':
     ### c) No service
     disp_ip = 'None'
 
-    sp.call(['bash', colloc_retina_env_file_path])
+    sp.call(['bash', colloc_retina_env_file_path])'''
 
     '''sp.run(restart_workers_cmd, shell=True)
     os.chdir(retina_dir)
