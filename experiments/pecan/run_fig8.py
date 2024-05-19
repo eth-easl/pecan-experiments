@@ -236,9 +236,11 @@ if model == 'ResNet50_v2-8':
     sp.run(plot_cmd.format('ResNet50', ' '.join([colloc_tpu, cachew_tpu, pecan_tpu]), ' '.join([colloc_cpu, cachew_cpu, pecan_cpu]), 'plots/ResNet50_v2-8'), shell=True)
 
 elif model == 'retina':
-    '''print('Running Retina experiments')
+    print('Running Retina experiments')
 
-    ### a) Pecan
+    sp.call(['bash', 'retina.sh'])
+
+    '''### a) Pecan
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)

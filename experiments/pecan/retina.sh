@@ -117,4 +117,4 @@ python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_
 cd ../../../../../../../../pecan-experiments/experiments/pecan
 gsutil rm -r $model_dir
 
-python run_fig8.py -m retina
+#python run_fig8.py -m retina

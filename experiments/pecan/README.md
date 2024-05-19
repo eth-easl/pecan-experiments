@@ -21,29 +21,17 @@ For the initial `kick-the-tires` phase please go through steps 1-6 ("Getting Sta
 
 ### RetinaNet
 
-The follwoing steps perform the RetinaNet experiment:
-1. **Activate tmux window**. Since some of our experiments can take long to run, make sure to set up a terminal multiplexer such as `tmux` in case your connection is interrupted. A very short introduction can be found at the end of this readme.
-2. **Activate the Artifact Eval virtual environment** `source ~/atc_venv/bin/activate`
-3. **Go to the experiments directory** `cd ~/pecan-experiments/experiments/pecan`
-4. **Starting the cluster**. Execute `./manage_cluster.sh start`. The script will create and setup a cluster of several virtual machines.
-5. **Checking the status** of the cluster by executing `./manage_cluster.sh status`. If all the status indicators show a green `[OK]`, carry on with the next step.
-6. **Run RetinaNet experiment**. Due to the way in which the RetinaNet model was constructed, it must be run dirrectly from the terminal:
-    a. **Run the input pipeline with Pecan** - producing data for the brown bars. Run:
-    
-    To set up the environment: `source env/pecan_retina_env.sh`
+Due to the way in which the RetinaNet model was constructed, it must be run dirrectly from the terminal (otherwise it will hang). Hence please do not use tmux for these experiments.
 
-    To run RetinaNet itself: `python main.py --strategy_type=tpu --tpu="${TPU_ADDRESS?}" --model_dir="${model_dir?}" --save_checkpoint_freq=$save_checkpoint_freq --mode=train --local_workers=$n_loc --params_override="{ type: retinanet, train: { checkpoint: { path: ${RESNET_CHECKPOINT?}, prefix: resnet50/ }, train_file_pattern: ${TRAIN_FILE_PATTERN?}, iterations_per_loop: 250, total_steps: ${total_steps}}, eval: { val_json_file: ${VAL_JSON_FILE?}, eval_file_pattern: ${EVAL_FILE_PATTERN?}, num_steps_per_eval: ${ITERS_PER_LOOP} } }" 2>&1 | tee $log_out`
-
-    b. **Run the input pipeline with Cachew** - producing data for the orange bars. Run:
-
-    `source env/cachew_retina_env.sh && 
-
-    c. **Run the pipeline in the collocated mode** - producing data for the blue bars. Run:
-
-    `source env/colloc_retina_env.sh && 
-
-    d. **Generate a plot with the cost of each config** - generating a plot `plots/Retina.pdf`
-7. **Tear down the cluster**. Please make sure to execute `./manage_cluster.sh stop` to tear down the cluster. All statuses should show a green `[OK]`.
+1. **Activate the Artifact Eval virtual environment** `source ~/atc_venv/bin/activate`
+2. **Go to the experiments directory** `cd ~/pecan-experiments/experiments/pecan`
+3. **Starting the cluster**. Execute `./manage_cluster.sh start`. The script will create and setup a cluster of several virtual machines.
+4. **Checking the status** of the cluster by executing `./manage_cluster.sh status`. If all the status indicators show a green `[OK]`, carry on with the next step.
+5. **Run RetinaNet experiment**. Use `python run_fig8.py -m retina &` More concretely this script does the following:
+    a. **Run the input pipeline with Pecan** - producing data for the brown bars
+    b. **Run the input pipeline with Cachew** - producing data for the orange bars
+    c. **Run the pipeline in the collocated mode** - producing data for the blue bars
+    d. **Generate a plot with the cost of each config** - generating a plot `plots/RetinaNet.pdf`
 
 We use Google Cloud Compute Engine for all experiments and read input datasets from Google Cloud Storage buckets. Please see [this](https://docs.google.com/spreadsheets/d/1iwkurV_3AxQ7a_KcKKhgDBbO5r0rSQZxcjTqwgxE9Mg/edit?usp=sharing) spreadsheet for an estimate of the time and cost of running each of the above experiments.
 
