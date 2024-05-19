@@ -178,6 +178,7 @@ if model == 'short':
     print('Running Getting Started experiment')
 
     ### a) Pecan (with all workers used all the time)
+    sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
     set_service_img(pecan_img)
     set_scaling_policy(2) # Fixed number of workers
 
@@ -199,6 +200,7 @@ if model == 'ResNet50_v2-8':
 
     print('Running Resnet experiments')
     ### a) Pecan
+    sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
     set_service_img(pecan_img)
 
     sp.run(restart_workers_cmd, shell=True)
@@ -239,6 +241,7 @@ elif model == 'retina':
     print('Running Retina experiments')
 
     sp.call(['bash', 'retina.sh'])
+    sp.run('gsutil rm -r '+retina_model_dir, shell=True)
 
     '''### a) Pecan
     set_service_img(pecan_img)
