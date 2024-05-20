@@ -24,7 +24,8 @@ restart_workers_cmd = '''./manage_cluster.sh restart_service'''
 stop_workers_cmd = '''./manage_cluster.sh stop'''
 service_yaml = '''default_config.yaml'''
 
-pecan_img = '''tf_oto:dan_fast_removal_100b''' #'''tf_oto:pecan'''
+pecan_img = '''tf_oto:dan_fast_removal_ae''' #'''tf_oto:pecan'''
+pecan_ae_img = '''tf_oto:dan_fast_removal_ae'''
 cachew_img = '''tf_oto:pecan''' # We use the pecan img, but we disable autoorder and simply spawn 0 remote workers
 
 resnet_model_dir = "gs://otmraz-eu-logs/Resnet/ImageNet/${USER}"
@@ -201,9 +202,10 @@ if model == 'ResNet50_v2-8':
     print('Running Resnet experiments')
     ### a) Pecan
     sp.run('gsutil rm -r '+resnet_model_dir, shell=True)
-    set_service_img(pecan_img)
+    set_service_img(pecan_ae_img)
 
     sp.run(restart_workers_cmd, shell=True)
+    os.chdir(resnet_dir)
     sp.run(prepare_resnet_cmd+pecan_cmd+ResNet_cmd_param.format(500, 8), shell=True)
     os.chdir(exp_dir)
     sp.run('gsutil rm -r '+resnet_model_dir, shell=True)

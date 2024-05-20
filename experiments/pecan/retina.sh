@@ -6,7 +6,7 @@ echo Running Retina experiments
 ############################################ PECAN ################################################################
 echo 1. Running Pecan
 
-new_line='image: "tf_oto:dan_fast_removal_100b"'
+new_line='image: "tf_oto:dan_fast_removal_ae"'
 sed -i.bak -E 's#^image:.*#'"$new_line"'#' default_config.yaml
 ./manage_cluster.sh restart_service
 

@@ -41,7 +41,7 @@ We use Google Cloud Compute Engine for all experiments and read input datasets f
 
 ### Reference Results and Variability
 
-This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement policices. Both AutoScaling & AutoPlacement rely on (somewhat noisy) runtime metrics. The permormance is also impacted by the current load in Google Cloud. Hence it is expected to observe some variability in the exact costs of Cachew and Pecan, in particular the remote worker costs.
+This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement policices. Both AutoScaling & AutoPlacement rely on (somewhat noisy) runtime metrics. The permormance is also impacted by the current load in Google Cloud. Hence it is expected to observe some variability in the exact costs of Cachew and Pecan, especially in the ResNet experiment which uses many workers.
 
 **The key result here is that Pecan incurrs a significantly lower cost than collocated or Cachew setups.**
 
