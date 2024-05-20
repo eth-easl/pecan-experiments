@@ -14,7 +14,7 @@ In order to execute the experiments in a reasonable time, we enable the fast wor
 
 ### Failed to Mount GlusterFS
 
-During the deployment of a cluster using the `./manage_cluster.sh start` command (or any of its variants), GlusterFS is being deployed. It can sometimes happen that GlusterFS deployment will fail due to some reason. This will show up in the deployment check (note that GlusterFS could not be mounted):
+During the deployment of a cluster using the `./manage_cluster.sh start` command, GlusterFS is being deployed. It can sometimes happen that GlusterFS deployment will fail due to some reason. This will show up in the deployment check (note that GlusterFS could not be mounted):
 
 <img src="../Figures/failed_gluster.png" height=240/>
 

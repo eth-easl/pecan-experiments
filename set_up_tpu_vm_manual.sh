@@ -4,6 +4,7 @@ source .bashrc
 
 sudo apt update
 sudo apt install python3.8-venv -y
+
 python3 -m venv atc_venv
 source atc_venv/bin/activate
 

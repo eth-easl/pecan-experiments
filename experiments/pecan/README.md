@@ -51,9 +51,11 @@ Hellow World experiment:
 
 <img src="../pecan/plots/sample_plots/Getting_started.jpg" height=240/>
 
-ResNet experiment:
+ResNet experiment (2 versions of possible results):
 
 <img src="../pecan/plots/sample_plots/fig8_ResNet50_v2-8.jpg" height=240/>
+
+<img src="../pecan/plots/sample_plots/fig8_ResNet50_v2-8_2.jpg" height=240/>
 
 RetinaNet experiment:
 
