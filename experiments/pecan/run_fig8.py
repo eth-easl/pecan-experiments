@@ -65,15 +65,15 @@ export DISPATCHER_IP='disp'
 log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_getting_started.log"
 '''
 pecan_cmd = '''
-export USE_AUTOORDER=False
-export n_loc=0
-export DISPATCHER_IP='None'
+export USE_AUTOORDER=True
+export n_loc=10
+export DISPATCHER_IP='disp'
 log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_pecan.log"
 '''
 cachew_cmd = '''
 export USE_AUTOORDER=False
 export n_loc=0
-export DISPATCHER_IP='None'
+export DISPATCHER_IP='disp'
 log_out="../../../../../../../../../pecan-experiments/experiments/pecan/logs/resnet_cachew.log"
 '''
 colloc_cmd = '''
