@@ -40,7 +40,7 @@ We assume that you have access to a Linux/macOS terminal, or WSL2. Our scripts m
 
 #### Artifact Evaluation Deployment
 
-If you are part of the ATC'24 AE committee, please follow the next instructions (please not to always use the `europe-west4-a` GCP region):
+If you are part of the ATC'24 AE committee, please follow the next instructions (please note to always use the `europe-west4-a` GCP region):
 
 1. Create an anonymous email, and create a GCP account on it. Then send the email to us via HotCRP so we can add you to our GCP project.
 1. Once added, make sure to set the correct project in `gcloud` using `gcloud config set project`
