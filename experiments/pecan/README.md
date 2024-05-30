@@ -47,7 +47,7 @@ This experiment runs Cachew's AutoScaling and Pecan's AutoOrder & AutoPlacement 
 
 Below we offer the reference results:
 
-Hellow World experiment:
+Hello World experiment:
 
 <img src="../pecan/plots/sample_plots/Getting_started.jpg" height=240/>
 
