@@ -5,7 +5,7 @@ All commands below are intended to be executed on the remote TPU VM as deployed 
 
 ### Kick-the-tires and ResNet
 
-For the initial `kick-the-tires` phase please go through steps 1-6 ("Getting Started" example). For the `full evaluation` of the ResNet experiment, please complete steps.
+For the initial `kick-the-tires` phase please go through steps 1-6 ("Getting Started" example). For the `full evaluation` of the ResNet experiment, please complete all steps.
 
 1. **Activate tmux window**. Since some of our experiments can take long to run, make sure to set up a terminal multiplexer such as `tmux` in case your connection is interrupted. A very short introduction can be found at the end of this readme.
 2. **Activate the Artifact Eval virtual environment** `source ~/atc_venv/bin/activate`
