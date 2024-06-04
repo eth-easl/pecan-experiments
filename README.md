@@ -12,7 +12,7 @@ To minimize end-to-end training cost, Pecan uses 2 policies:
 
 Pecan builds on top of the [Cachew](https://www.usenix.org/system/files/atc22-graur.pdf) data loading framework in [TensorFlow](https://github.com/tensorflow/tensorflow), extending it with the AutoPlacement and AutoOrder policies.
 
-This repository contains instructions for deploying Pecan in Google Cloud and using the service to efficiently execute ML input data pipelines. To view the source code, please see our [Pecan source code repository](https://github.com/eth-easl/cachew/tree/oto-pecan). 
+This repository contains instructions for deploying Pecan in Google Cloud and using the service to efficiently execute ML input data pipelines. To view the source code, please see our [Pecan source code repository](https://github.com/eth-easl/cachew/tree/pecan). 
 
 ## Pecan System Architecture
 
@@ -58,7 +58,7 @@ If you are part of the ATC'24 AE committee, please follow the next instructions 
         1. `./manage_cluster.sh stop   # Once you are ready, use this command to take down the cluster`
 1. If you can successfully execute these steps then you are ready to execute experiments. Please go to [experiments/pecan](experiments/pecan) and follow the README there.
 
-![successfull cluster start](Figures/successful_manage_clester_start.png)
+![successfull cluster start](Figures/successful_manage_cluster_start.png)
 
 Please ignore the *Manual Deployment* steps (not part of the Artifact Evaluation).
 
