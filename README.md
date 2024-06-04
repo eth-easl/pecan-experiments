@@ -104,7 +104,7 @@ Since deploying a cluster and running experiments can be complicated, we provide
 
 ## Contributing
 
-We welcome contributions to Pecan. Please see our [Pecan source code](https://github.com/eth-easl/cachew/tree/oto-pecan) repository.
+We welcome contributions to Pecan. Please see our [Pecan source code](https://github.com/eth-easl/cachew/tree/pecan) repository.
  
 ## Referencing our work
 
