@@ -108,8 +108,7 @@ We welcome contributions to Pecan. Please see our [Pecan source code](https://gi
  
 ## Referencing our work
 
-Pecan will appear at USENIX ATC'24. If you decide to use Pecan in your work, please cite our paper: 
-
+If you decide to use Pecan in your work, please cite our paper: 
 ```
 @inproceedings{pecan,
   author    = {Dan Graur and
@@ -119,7 +118,8 @@ Pecan will appear at USENIX ATC'24. If you decide to use Pecan in your work, ple
                Chandramohan A. Thekkath and
                Ana Klimovic},
   title     = {Pecan: Cost-Efficient ML Data Preprocessing with Automatic Transformation Ordering and Hybrid Placement},
-  booktitle = {Proceedings of the USENIX Annual Technical Confernece (ATC'24)},
+  booktitle = {2024 USENIX Annual Technical Conference (USENIX ATC 24)},
+  pages     = {649--665},
   publisher = {{USENIX}},
   year      = {2024},
 }
