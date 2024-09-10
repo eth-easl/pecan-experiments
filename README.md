@@ -100,7 +100,7 @@ Since deploying a cluster and running experiments can be complicated, we provide
 
 ## Building Pecan
 
-**Please note that you are not required to build Pecan or generate Docker images for it, as we have pre-built all the necessary binaries for running the artifact evaluation experiments.** We do however, provide scripts for building Pecan and generating its images. These can be found in the [build](build) folder. For more details, please follow the README file in the aforementioned directory.
+**Please note that you are not required to build Pecan or generate Docker images for it, as we have pre-built all the necessary binaries for running the artifact evaluation experiments.** We do however, provide scripts for building Pecan and generating its images. These can be found in the  [build](https://github.com/eth-easl/cachew_experiments/tree/main/build) folder of the cachew_experiments repo. For more details, please follow the README file in the aforementioned directory.
 
 ## Contributing
 
