@@ -1,4 +1,4 @@
-Figure 8: Collocated vs. Cachew vs. Pecan
+Figure 6: Collocated vs. Cachew vs. Pecan
 =======
 
 All commands below are intended to be executed on the remote TPU VM as deployed via the `create_tpu_vm.sh` script. If you have not already done so, `ssh` into it using `gcloud alpha compute tpus tpu-vm ssh --zone europe-west4-a atc24-ae-<TPU_name>`
