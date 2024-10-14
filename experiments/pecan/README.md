@@ -12,7 +12,7 @@ For the initial `kick-the-tires` phase please go through steps 1-6 ("Getting Sta
 3. **Go to the experiments directory** `cd ~/pecan-experiments/experiments/pecan`
 4. **Starting the cluster**. Execute `./manage_cluster.sh start`. The script will create and setup a cluster of several virtual machines.
 5. **Checking the status** of the cluster by executing `./manage_cluster.sh status`. If all the status indicators show a green `[OK]`, carry on with the next step.
-6. **Run Hellow World example**. Run the following command to execute a short ResNet run to check the setup is working correctly. `python run_fig8.py -m short` In this run, all workers are used at all times and a single bar is produced in the plot `plots/Getting_started.pdf` (see our Reference Results below and the sample log file `logs/sample_logs/hello_world.log`).
+6. **Run Hello World example**. Run the following command to execute a short ResNet run to check the setup is working correctly. `python run_fig8.py -m short` In this run, all workers are used at all times and a single bar is produced in the plot `plots/Getting_started.pdf` (see our Reference Results below and the sample log file `logs/sample_logs/hello_world.log`).
 7. **Run ResNet50 experiment**. Start up the cluster again (steps 4. and 5.). Run the following command to execute the experiments for the ResNet in Fig 8. `python run_fig8.py -m ResNet50_v2-8`. More concretely this script does the following:
     a. **Run the input pipeline with Pecan** - producing data for the brown bars
     b. **Run the input pipeline with Cachew** - producing data for the orange bars
